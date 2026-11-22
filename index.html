@@ -122,7 +122,7 @@ p.it.end{margin:36px 0 8px;text-align:right;opacity:.75;background:none}
 ol.tl{list-style:none;padding:0;margin:.4em 0}ol.tl>li{padding:.25em 0 .25em .2em;border-bottom:1px dashed var(--line);font-size:.93rem}
 ol.route{padding-left:1.3em;margin:.4em 0}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
-.fnb{font-size:.88rem;color:var(--mut);border-top:1px solid var(--line);margin-top:1.6em;padding-top:.6em}.fnb ol{margin:.3em 0;padding-left:1.4em}.fn{font-size:.72em;color:var(--acc);vertical-align:super}</style></head><body>
+.fnb{font-size:.88rem;color:var(--mut);border-top:1px solid var(--line);margin-top:1.6em;padding-top:.6em}.fnb ol{margin:.3em 0;padding-left:1.4em}.fn{cursor:pointer;font-size:.72em;color:var(--acc);vertical-align:super}.fn:hover{text-decoration:underline}#fncard{position:absolute;z-index:60;max-width:min(320px,calc(100vw - 16px));box-sizing:border-box;padding:10px 14px;background:var(--card);color:var(--ink);border:1px solid var(--acc);border-radius:6px;font-size:.88rem;line-height:1.7;box-shadow:0 4px 14px rgba(0,0,0,.18)}#fncard b{display:block;color:var(--acc);font-size:.78rem;letter-spacing:.1em;margin-bottom:2px}.fnb li.fnhl{background:var(--card);box-shadow:inset 3px 0 var(--acc);transition:background .4s}.fnb .fnback{margin-left:.4em;cursor:pointer;color:var(--acc);text-decoration:none}</style></head><body>
 <div id="intro"><div class="t">LEVEL -616<small>空房間。你被注視著。請稍候。</small></div><button id="door" type="button" aria-label="開啟入口" disabled></button><button id="introSkip" type="button">略過入口等待</button></div>
 <div id="app">
 <header><h1>Level <b id="redh">-616</b> 實驗場</h1><div><span id="badge"></span> <button id="authbtn">權限認證</button> <button id="thm">明暗</button></div></header>
@@ -216,7 +216,7 @@ function nxt(k){const i=ROUTE.findIndex(r=>r[0]==k);if(i<0)return '';const a=ROU
 function rel(k){const a=(REL[k]||[]).filter(x=>P[x]&&!(P[x].hid&&!found&&clr<3));return a.length?'<div class="rel"><span>相關頁面</span>'+a.map(x=>{const c=P[x].l>clr;return `<a href="#" class="chip${c?' lc':''}" data-go="${x}">${c?'🔒 ':''}${P[x].n}</a>`}).join('')+'</div>':''}
 const KW=[['白日之影','shade'],['Level 995','base'],['TG-P-12','rec','09'],['TG-P-07','rec','06'],['實驗中止','rules'],['中止機制','rules'],['中止協議','rules'],['房間規則','rules'],['空間結構','space'],['樓層歷史','hist'],['探索紀錄','exp'],['模擬體驗','sim'],['契約與人員紀錄','fc'],['訪談紀錄','f2'],['根基事件','inc'],['樓層根基','inc'],['通訊紀錄','rec'],['特殊物品','anom'],['特殊狀態','anom'],['早期危險評估','f1'],['契約','fc']];
 function linkify(){if(!P[cur]||['talk','sim','rec','shade'].includes(cur))return;const root=$('#main'),seen=new Set();root.querySelectorAll('a[data-go]:not(.chip)').forEach(a=>seen.add(a.dataset.go+(a.dataset.rec||'')));const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),ns=[];while(w.nextNode())ns.push(w.currentNode);for(let i=0;i<ns.length;i++){const n=ns[i],p=n.parentElement;if(!p||p.closest('a,summary,h1,h2,h3,h4,button,.q,[data-k],.stamp,.chip,.tools,.rel,.nm,.keep,.red'))continue;let b=null;for(const [t,k,r] of KW){if(k==cur)continue;const key=k+(r||'');if(seen.has(key))continue;const ix=n.nodeValue.indexOf(t);if(ix>=0&&(!b||ix<b.ix))b={ix,t,k,r,key}}if(!b)continue;seen.add(b.key);const mid=n.splitText(b.ix),after=mid.splitText(b.t.length),a=document.createElement('a');a.href='#';a.className='lk'+(P[b.k].l>clr?' lc':'');a.dataset.go=b.k;if(b.r)a.dataset.rec=b.r;if(P[b.k].l>clr)a.title='需要更高權限';a.textContent=b.t;mid.replaceWith(a);ns.splice(i+1,0,after)}}
-function linkIds(){if(!P[cur]||['talk','sim','rec'].includes(cur))return;const root=$('#main');if(!root)return;const SK='a,summary,h1,h2,h3,h4,button,.q,.meta,.chip,.tools,.rel,.nm,.keep,.red,.it,[data-k],.stamp';const RE=/(EX-\d\d|I-0\d(?!\d)|S-0\d(?!\d)|FD-0\d|U-00\d|通訊紀錄 \d\d)/;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),ns=[];while(w.nextNode())ns.push(w.currentNode);ns.forEach(n=>{if(!n.isConnected)return;const p=n.parentElement;if(!p||p.closest(SK))return;let node=n,m;while(node&&(m=RE.exec(node.nodeValue))){const t=m[1],pre=t.slice(0,2);let k,r,j;if(t.startsWith('EX'))k='exp',j=t.toLowerCase();else if(t.startsWith('I-')||t.startsWith('S-'))k='anom',j=t.toLowerCase();else if(t.startsWith('FD'))k='space',j=t.toLowerCase();else if(t.startsWith('U-'))k='unf',j=t.toLowerCase();else{k='rec';r=t.slice(-2)}const mid=node.splitText(m.index),after=mid.splitText(t.length),a=document.createElement('a');a.href='#';a.className='lk'+(P[k].l>clr?' lc':'');a.dataset.go=k;if(r)a.dataset.rec=r;if(j)a.dataset.j=j;if(P[k].l>clr)a.title='需要更高權限';a.textContent=t;mid.replaceWith(a);node=after}})}
+function linkIds(){if(!P[cur]||['talk','sim','rec'].includes(cur))return;const root=$('#main');if(!root)return;const SK='a,summary,h1,h2,h3,h4,button,.q,.meta,.chip,.tools,.rel,.nm,.keep,.red,.it,[data-k],.stamp';const RE=/(I-06\/\d\d|REC-(?:██-)?\d\d|PRV-(?:██-)?\d\d|TG-AUD-003|SEC-A0[13]|INT-L-616-04|附錄 [A-E]|EX-\d\d|I-0\d(?!\d)|S-0\d(?!\d)|FD-0\d|U-00\d|通訊紀錄 \d\d)/;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),ns=[];while(w.nextNode())ns.push(w.currentNode);ns.forEach(n=>{if(!n.isConnected)return;const p=n.parentElement;if(!p||p.closest(SK))return;let node=n,m;while(node&&(m=RE.exec(node.nodeValue))){const t=m[1],pre=t.slice(0,2);let k,r,j;if(/^REC-/.test(t)){k='rec';r=t.slice(-2)}else if(/^PRV-/.test(t)){k='rec';r='P-'+t.slice(-2)}else if(t==='TG-AUD-003'||t==='SEC-A03'){k='rec';r='P-01'}else if(t==='SEC-A01'){k='rec';r='01'}else if(/^I-06\//.test(t)){k='rec';r=t}else if(t==='附錄 D'||t==='INT-L-616-04'){k='fc';j='fc-appd'}else if(t==='附錄 E'){k='fc';j='fc-appe'}else if(t==='附錄 A'){k='appx';j='apx-a'}else if(t==='附錄 B'){k='appx';j='apx-b'}else if(t.startsWith('EX'))k='exp',j=t.toLowerCase();else if(t.startsWith('I-')||t.startsWith('S-'))k='anom',j=t.toLowerCase();else if(t.startsWith('FD'))k='space',j=t.toLowerCase();else if(t.startsWith('U-'))k='unf',j=t.toLowerCase();else{k='rec';r=t.slice(-2)}const mid=node.splitText(m.index),after=mid.splitText(t.length),a=document.createElement('a');a.href='#';a.className='lk'+(P[k].l>clr?' lc':'');a.dataset.go=k;if(r)a.dataset.rec=r;if(j)a.dataset.j=j;if(P[k].l>clr)a.title='需要更高權限';a.textContent=t;mid.replaceWith(a);node=after}})}
 const dlg=(a,b)=>`<p class="q"><b>${a}</b>：${b}</p>`;
 const P={
 home:{n:'樓層概述',l:1,h:()=>`<h2>實驗場（The Testing Ground）</h2>
@@ -226,15 +226,15 @@ home:{n:'樓層概述',l:1,h:()=>`<h2>實驗場（The Testing Ground）</h2>
 
 <p>Level -616，研究部暫稱「實驗場」，是一處由大量房間、走廊與彼此重疊的空間構成的非線性樓層。各區域的規模、用途與物理條件差異極大：一扇普通的辦公室房門後，可能連接著數十個房間的建築群；一段看似筆直的走廊，在回頭時長度已經改變。樓層沒有可確認的中心與固定平面圖，也沒有穩定的遠近關係<sup class="fn">[1]</sup>（見${L('space','空間結構')}）。</p>
 <h3>樓層簡述</h3>
-<p>進入者通常從初始房間出發，穿過一連串規則各異的空間，包括限時、選擇、合作、觀察、記憶與感知等類型。部分空間的外觀與實際用途並不一致（見${L('space','空間結構')}）。出口多以原本不存在的門出現，目的地無法預測。實驗場無法維持常設基地，通訊與物資同樣不可靠（見${L('base','基地・出入口')}）。</p>
+<p>進入者通常從初始房間出發，穿過一連串規則各異的空間，包括限時、選擇、合作、觀察、記憶與感知等類型。部分空間的外觀與實際用途並不一致：廚房可能被當成教室使用，座位決定通行權限（見${L('rules','房間規則')}）。出口多以原本不存在的門出現，目的地無法預測。實驗場無法維持常設基地，通訊與物資同樣不可靠（見${L('base','基地・出入口')}）。</p>
 <p>這些房間的配置、規則與出口，大多由一個隱密實體——白日之影——設置與調整；它與樓層的根基共生，是整座實驗場運作的核心（見${L('shade','實體觀測檔案')}）。早期的實驗場以致命實驗聞名，現行的危險程度已明顯下降，變化過程見${L('hist','樓層歷史')}。</p>
 <h3>初始房間</h3>
 <p>進入者通常出現在一間空曠、乾淨的立方體房間內，邊長約五至六公尺。六個面均為淺色的平整材料，牆面看不出接縫，沒有窗戶、家具或可辨識的光源，照明卻均勻明亮，足以閱讀與行走。牆面不會積留污漬，地板也不留持久的腳印。以敲擊與聲波探測牆體、地板與天花板，均未發現空腔<sup class="fn">[2]</sup>。</p>
 <p>初始房間並非每次都完全相同。一般流浪者遇到的幾乎都是上述白色房間；少數人員會被送往辦公室、住宅、長廊或與自身記憶相關的房間，這類個案的紀錄列為機密（見${L('f2','研究訪談')}、${L('fc','契約與人員紀錄')}）。研究部認為，樓層會依進入者過往的接觸紀錄安排初始空間。</p>
 <p>進入後的最初幾分鐘，探索者普遍感到自己正被注視，但現場找不到攝影機、鏡面或其他觀察裝置；聲音有時從不存在的門後傳來。約六分鐘後，其中一面牆上會出現一扇原本不存在的門，通常位於進入者的右側。門出現之前，不建議敲擊牆面、破壞牆體或自行尋找裂縫。</p>
 
-<h3>須知</h3><ul><li>不要假設同一扇門會固定通往同一地點；路線、用途與規則的判斷方式見${L('rules','房間規則')}與${L('base','基地・出入口')}。</li><li>若房間規則突然停止、出口接連消失，或聽見結構發出持續低鳴，應停止探索並尋找最近的可辨識出口。</li><li>不要攻擊 Shade，也不要把它偶爾提供的協助視為必然。</li></ul>
-<div class="fnb"><b>腳註</b><ol><li>M.E.G.CN 曾多次以測距儀、標記帶與紙本地圖嘗試繪製樓層地圖，所有測量結果都無法長期維持一致。</li><li>EX-11 的探索小隊逐面敲擊牆壁、地板與天花板，結果一致；現有工具也無法在牆面留下任何痕跡。</li></ol></div>
+<h3>須知</h3><ul><li>不要假設同一扇門會固定通往同一地點。</li><li>不要以外觀推斷用途，也不要假設不同房間遵循相同的規則；同一房間內的功能表現，目前看來多半會維持一致，但仍有例外紀錄。</li><li>不要以牆面、走廊長度或指南針方向推斷返程路線。</li><li>進入合作房間前，先確認同伴是否仍在同一空間；聲音相同不代表位置相同。</li><li>若房間規則突然停止、出口接連消失，或聽見結構發出持續低鳴，應停止探索並尋找最近的可辨識出口。</li><li>不要攻擊 Shade，也不要把它偶爾提供的協助視為必然。</li></ul>
+<div class="fnb"><b>腳註</b><ol><li>M.E.G.CN 曾多次以測距儀、標記帶與紙本地圖嘗試繪製樓層地圖，所有測量結果都無法長期維持一致。</li><li>EX-13 的探索小隊逐面敲擊牆壁、地板與天花板，結果一致；現有工具也無法在牆面留下任何痕跡。</li></ol></div>
 `},
 space:{n:'空間結構',l:1,h:()=>`<h2>空間結構</h2>
 <p>實驗場並非由單一建築向外延伸，而是由許多尺度、用途與物理條件各異的空間拼接而成：狹窄的儲藏室、挑高的大廳、無窗的長廊與整層的教室彼此相連，沒有任何一處能作為整體的參照點。房間之間的連接關係隨時變動，也不遵循一般建築的內外、上下或遠近概念。兩扇相鄰的門可能通往相距甚遠的區域，走廊盡頭的門也可能回到剛離開的房間<sup class="fn">[1]</sup>。連接方式不固定之外，空間本身的用途也不必然與外觀相符（見下方「空間功能錯置」）。</p>
@@ -272,8 +272,8 @@ rules:{n:'房間規則',l:1,h:()=>`<h2>房間規則</h2>
 <details><summary>異常房間</summary>房間會出現重力改變、旋轉、地面移動、出口閃避、重複影像或物體錯位。持續低鳴、牆面重疊或視野扭曲，代表結構不穩定。<br><b>應對</b>：停止觸碰裝置，抓住固定物，等待變化出現規律。<br><b>常見失誤</b>：朝出口衝刺；在移動的地面上單獨行動。</details>
 <details><summary>觀察房間</summary>房間沒有明確的任務，主要呈現異常現象或來自其他房間的聲音；停留一段時間後，門通常會自行出現。<br><b>應對</b>：記錄現象的順序與時間，保持原地等待。<br><b>常見失誤</b>：把「沒有任務」當成「沒有危險」；觸碰未知物品或追逐聲源。</details>
 <details><summary>記憶與感知房間</summary>房間會重現熟悉的場景、人物的聲音或片段的記憶，內容未必可靠，不能作為證詞。<br><b>應對</b>：與同行者各自描述所見，再互相比對。<br><b>常見失誤</b>：看見已離開樓層的人時單獨追隨。</details>
-<details><summary>功能錯置房間</summary>房間的外觀、用途與實際功能不一致（成因見${L('space','空間結構')}），通常不說明在做什麼，任務隱含在家具、設備與建築構件的運作中。需要的往往是重新排列房間或完成某種流程，而不是找鑰匙。<br><b>應對</b>：先觀察，再逐一測試，並記錄每次改變。<br><b>常見失誤</b>：依外觀推斷用途；同時測試多個裝置，無法分辨是哪一個產生了反應。</details>
-<details><summary>行為與關係房間（非解謎型）</summary>沒有可解的謎，也不一定有明確任務。目前紀錄包含陪伴、實際勞務與休息，案例與判讀限制見${L('exp','EX-15')}。<ul><li><b>陪伴</b>：不要求行動，只需有人留在房間。</li><li><b>勞務</b>：重複而實際的搬運、整理或修補。</li><li><b>休息</b>：提供食物與床位，沒有明示任務；不能因此推定所有休息房間都安全。</li></ul><p class="note">以上是依個案整理的暫定分類。單一案例只能支持該次觀察，不足以證明所有同類房間都遵循相同條件。</p></details>
+<details><summary>功能錯置房間</summary>房間的外觀、用途與實際功能不一致（成因見${L('space','空間結構')}），通常不說明在做什麼，任務隱含在家具、設備與建築構件的運作中：座位決定通行權限，號碼牌決定誰能移動。需要的往往是重新排列房間或完成某種流程，而不是找鑰匙。<br><b>應對</b>：先觀察，再逐一測試，並記錄每次改變。<br><b>常見失誤</b>：依外觀推斷用途；同時測試多個裝置，無法分辨是哪一個產生了反應。</details>
+<details><summary>行為與關係房間（非解謎型）</summary>沒有可解的謎，也不一定有明確任務；目前紀錄包含陪伴、實際勞務、聆聽他人經歷與休息。<ul><li><b>陪伴</b>：不要求行動，只需有人留在房間（見${L('exp','EX-17')}）。</li><li><b>勞務</b>：重複而實際的搬運、整理或修補（見${L('exp','EX-18')}）。</li><li><b>見證</b>：聆聽或記錄與自己無關的經歷（見${L('exp','EX-19')}）。</li><li><b>休息</b>：提供食物與床位，沒有明示任務；不能因此推定所有休息房間都安全（見${L('exp','EX-20')}）。</li></ul><p class="note">以上是依個案整理的暫定分類。單一案例只能支持該次觀察，不足以證明所有同類房間都遵循相同條件。</p></details>
 <h3>早期與現行</h3>
 <details><summary>早期規則與現行規則</summary><ul><li><b>倒數結束</b>：早期可能直接改變房間結構並造成傷亡；現行通常停止裝置或開啟出口。</li><li><b>出口條件</b>：早期曾有出口僅允許一人通過，或需犧牲人員；現行多數出現其他通過方式。</li><li><b>完成條件</b>：早期部分實驗沒有可辨識的完成條件，或未完整告知；現行多數房間有可理解的任務或可放棄的選項。</li><li><b>提示</b>：早期可能提供互相矛盾的線索；現行仍不保證提示完整可信。</li><li><b>空間功能</b>：早期規則多以文字、聲音或倒數呈現；現行部分房間改以空間與物件本身的功能配置為規則，不一定附任何說明。</li></ul><p class="note">並非所有房間都已更新，現行房間仍保留部分舊結構。</p></details>
 <div class="card"><b>實驗中止協議</b>：現行紀錄顯示，部分實驗在探索者的身體或精神狀態瀕臨極限時會停止運作，結構穩定並重新開啟出口。此機制不會治療傷勢，也不抹去已造成的傷害；它不是 M.E.G.CN 設置，無法人為啟動，並非所有房間都已確認具備，不能當作安全保障。切勿為了觸發中止而刻意承受傷害。</div>
@@ -325,7 +325,7 @@ shade:{n:'實體觀測檔案',l:1,h:()=>`<h2>白日之影</h2>
 <p>控制力與樓層根基的完整度似乎有所連動；根基受損時，它對樓層的控制可能下降，嚴重時也可能影響它自身的存在狀態。這項關係仍以研究部觀察與推測為主。</p>
 <h4>理解與選擇</h4>
 <p>它似乎尚未理解人類為空間與物件賦予的用途（見${L('space','空間結構')}）、名字對個人的意義，以及疼痛為何需要被在意。</p>
-<p>探索者表示「我不想繼續了」時，它會停止（見${L('exp','EX-03')}）；對方拒絕回答時，它不再強迫（見${L('exp','EX-07')}）；隊伍判斷試煉已完成時，它會開啟出口（見${L('exp','EX-06')}）。早期紀錄則顯示，它曾在對象明確拒絕時繼續實驗（見${L('f1','早期危險評估')}）。目前的停止行為已較為穩定，但尚不能據此認定它已理解人類的情感與社會規則。</p>
+<p>探索者表示「我不想繼續了」時，它會停止（見${L('exp','EX-03')}）；對方拒絕回答時，它不再強迫（見${L('exp','EX-11')}）；隊伍判斷試煉已完成時，它會開啟出口（見${L('exp','EX-06')}）。早期紀錄則顯示，它曾在對象明確拒絕時繼續實驗（見${L('f1','早期危險評估')}）。目前的停止行為已較為穩定，但尚不能據此認定它已理解人類的情感與社會規則。</p>
 </details>
 
 <details id="sh-beh" open><summary><b>行為與應對</b></summary>
@@ -342,7 +342,7 @@ shade:{n:'實體觀測檔案',l:1,h:()=>`<h2>白日之影</h2>
 <li><b>遇見探員</b>：若遇見自稱 M.E.G.CN 探員、正在處理樓層異常的人，請配合其引導，不要介入他與實體的交涉。他並非樓層管理者，也無法控制該實體。</li></ul></details>
 
 <details id="sh-event"><summary><b>根基與崩解</b></summary>
-<p><b>根基</b>：研究人員推測，樓層根基與它的存在維持機制有關。根基遭到嚴重破壞時，白日之影將逐漸失去對樓層的控制，並可能影響自身的存在狀態。目前沒有足夠證據確認其後果，尚無法判定根基完全崩解是否會導致實體消亡；它會優先保護根基。</p>
+<p><b>根基</b>：研究人員推測，樓層根基與它的存在維持機制有關。根基受損與它的控制力下降有關（見「與樓層的連動」）。目前沒有足夠證據確認其後果，尚無法判定根基完全崩解是否會導致實體消亡；它會優先保護根基。</p>
 <p><b>崩解</b>：樓層根基遭到嚴重破壞時，實驗房間會逐漸崩解，原有規則失去穩定，樓層內尚未離開的人將面臨危險，白日之影的行為模式也會隨之改變。具體經過與處置列為機密，見${L('inc','根基事件')}；也可在${L('sim','模擬體驗')}中親身經歷。</p></details>
 
 <details id="sh-disc"><summary><b>發現與研究</b></summary>
@@ -353,13 +353,13 @@ shade:{n:'實體觀測檔案',l:1,h:()=>`<h2>白日之影</h2>
 <details id="sh-view"><summary><b>各方觀點</b></summary>
 
 <h4>研究員</h4>
-<blockquote><b>R-03（行為組）</b>：「它似乎更在意人類如何作出決定。${L('exp','EX-07')}與${L('exp','EX-03')}之後，我們已經很難把沉默與拒絕當成失敗。」</blockquote>
+<blockquote><b>R-03（行為組）</b>：「它似乎更在意人類如何作出決定。${L('exp','EX-11')}與${L('exp','EX-03')}之後，我們已經很難把沉默與拒絕當成失敗。」</blockquote>
 <blockquote><b>R-07（空間組）</b>：「功能錯置可能只是把『用途』當成可調整的參數。根基受損後，房間配置似乎也會變得遲鈍；但這兩者是否直接相關，還不能確定。」</blockquote>
 
 <h4>探員</h4>
 <blockquote><b>A-22（救援小隊）</b>：「進去前有人說它通常不主動攻擊，但那種被看著的感覺很差。後來我發現，只要停下來認真看房間，那種感覺就會輕一些。我不確定這是不是錯覺。」</blockquote>
 <h4>流浪者</h4>
-<blockquote><b>W-01</b>：「它問我為什麼不走，我說我在等同伴。然後多了一扇門。我到現在還不知道該不該謝謝它。」（見${L('exp','EX-13')}）</blockquote>
+<blockquote><b>W-01</b>：「它問我為什麼不走，我說我在等同伴。然後多了一扇門。我到現在還不知道該不該謝謝它。」（見${L('exp','EX-15')}）</blockquote>
 <blockquote><b>W-02</b>：「有些房間很殘忍，有些房間又溫柔得奇怪。我分不清到底是不是同一個東西做的。」</blockquote>
 <blockquote><b>W-03</b>：「以前倒數歸零，我朋友沒有出來。現在大家都說它變了。如果它變了，那以前的呢？」</blockquote>
 </details>
@@ -372,14 +372,14 @@ shade:{n:'實體觀測檔案',l:1,h:()=>`<h2>白日之影</h2>
 <li><b>O-02</b>（20██/06/08・今年度）：試煉結束後，封閉的牆面出現一扇門，門後只有無法辨識的黑暗。隊伍沒有進入，約三分鐘後門自行關閉。</li>
 <li><b>O-03</b>（20██/08/12・今年度）：某隊完成試煉後，牆面出現新文字：「你們剛才為什麼沒有告訴他？」該隊確實發生過資訊隱瞞，但未曾在房間內公開討論。</li></ul>
 <p><b>接觸紀錄索引</b>：除上述 O-01～O-03 外，下列聲音或文字也出自白日之影：</p>
-<ul><li>I-04 空白紀錄器：離開房間後自動生成的十秒內音訊</li><li>EX-04：螢幕追問「為什麼？」</li><li>EX-07：紙上寫下「可以。」</li><li>EX-07：牆面「你們不需要說實話。」</li><li>EX-03：「可以。」</li><li>EX-07：「知道了。」</li><li>EX-06：紙上「你們已經完成了。」</li></ul>
+<ul><li>I-02 空白紀錄器：離開房間後自動生成的十秒內音訊</li><li>EX-04：螢幕追問「為什麼？」</li><li>EX-11：紙上寫下「可以。」</li><li>EX-12：牆面「你們不需要說實話。」</li><li>EX-03：「可以。」</li><li>EX-07：「知道了。」</li><li>EX-06：紙上「你們已經完成了。」</li></ul>
 <p><b>回應的共同特徵</b>：簡短、直接，沒有寒暄，似乎不熟悉人類的日常社交與隱含意義。常在人出現決策、沉默、放棄或求助的時刻發聲，回應之後多半伴隨出口開啟或規則停止。</p></details>
 
 <details id="sh-files"><summary><b>相關檔案</b></summary>
-<div class="apx"><div><b>檔案 1</b>　非公開音訊——人類行為指導紀錄<br>${L('rec','I-04 行為矯正錄音','I-04/01')}・${L('rec','通訊紀錄 02','02')}・${L('rec','通訊紀錄 P-02','P-02')}</div><div><b>檔案 2</b>　Level -616 實驗環境與異常現象紀錄<br>${L('space','空間結構')}・${L('rules','房間規則')}・${L('anom','特殊物品與特殊狀態')}・${L('exp','探索紀錄')}</div><div><b>檔案 3</b>　特殊事件紀錄——Level -616 根基崩解與實體介入<br>${L('inc','根基事件')}・${L('rec','通訊紀錄 09','09')}・${L('sim','模擬體驗')}・${L('hist','樓層歷史')}</div></div></details>
+<div class="apx"><div><b>檔案 1</b>　非公開音訊——人類行為指導紀錄<br>${L('rec','I-06 行為矯正錄音','I-06/01')}・${L('rec','通訊紀錄 02','02')}・${L('rec','通訊紀錄 P-02','P-02')}</div><div><b>檔案 2</b>　Level -616 實驗環境與異常現象紀錄<br>${L('space','空間結構')}・${L('rules','房間規則')}・${L('anom','特殊物品與特殊狀態')}・${L('exp','探索紀錄')}</div><div><b>檔案 3</b>　特殊事件紀錄——Level -616 根基崩解與實體介入<br>${L('inc','根基事件')}・${L('rec','通訊紀錄 09','09')}・${L('sim','模擬體驗')}・${L('hist','樓層歷史')}</div></div></details>
 <div class="card">歸檔備註：白日之影是組織的稱呼，並非它的名字。有人替它取過另一個。</div>`},
 base:{n:'基地・出入口',l:1,h:()=>`<h2>基地與出入口</h2><p>實驗場無法建立常設基地。房間與走廊的連接關係會自行改變，已確認的路線無法長期維持；物資存放處可能在無預警時被隔離、移位，或失去通往原區域的路徑。M.E.G.CN 曾多次在樓層內設置補給點與通訊中繼，均在數日內失效，目前僅保留少量可供短暫休整與聯絡的標記點，且不保證每次進入時都能找到<sup class="fn">[1]</sup>。</p>
-<h3>入口</h3><ul><li>部分探索者曾由沒有門把、表面平整的純白色門進入；門後是否連接 Level -616，似乎並不固定。</li><li>在空白房間內持續注視沒有接縫的牆面，等待門扉出現。</li><li>少數情況下，可能意外穿過不穩定的空間裂縫。裂縫位置與出現條件無法預測，不建議刻意尋找。</li></ul>
+<h3>入口</h3><ul><li>部分探索者曾由沒有門把、表面平整的純白色門進入；門後是否連接 Level -616，似乎並不固定。</li><li>在空白房間內持續注視沒有接縫的牆面，等待門扉出現。不要敲擊或破壞牆面。</li><li>少數情況下，可能意外穿過不穩定的空間裂縫。裂縫位置與出現條件無法預測，不建議刻意尋找。</li></ul>
 <h3>偶發入口</h3>
 <p>通往 Level -616 的異常通道並不侷限於特定樓層。這類通道持續時間短，出現位置與條件難以重現，目前回報仍屬零星，也沒有證據顯示它們出自同一來源；下列為較常見的形式。</p>
 <ul>
@@ -401,7 +401,7 @@ sim:{n:'模擬體驗',l:1,h:()=>`<h2>實驗場模擬</h2><p>這是一段以新�
 talk:{n:'非正式交流',l:1,hid:1,h:()=>`<h2>對 ${named?'Shade':'白日之影'} 說話</h2><p style="color:var(--mut);font-size:.9rem">它認識${clr>=2?'特工':'某位探員'}。對其他進入者，它只做觀察與紀錄。</p><div id="chat"><p class="sh">${named?'Shade':'白日之影'}：你好。這是${clr>=2?'特工':'某位探員'}教我的問候方式。</p></div><p><input id="say" placeholder="說點什麼，按 Enter 或送出"></p><p><button id="sendb">送出</button></p>`,i:talk},
 f1:{n:'早期危險評估',l:2,h:()=>`<h2>早期危險評估</h2><div class="meta"><div><i>原始難度</i>Class 5</div><div><i>權限</i>高級研究人員</div></div>
 <div class="card warn"><b>風險摘要</b>　早期實驗場以致命實驗為常態：房間可造成永久傷害或死亡，規則不事先告知，出口不保證在任務完成前出現。現行難度經評估降為 Class 1，不代表下述情形已確認解決。</div>
-<details open><summary>樓層規則的轉變</summary><p>早期紀錄顯示，實驗場曾以高風險實驗為主要運作方式，房間可能造成永久傷害或死亡，且出口不一定會在任務完成前出現。其後規則逐步放寬（原因與一名探員和 Shade 的長期接觸有關，見${L('fc','契約與人員紀錄')}；變化經過見${L('hist','樓層歷史')}階段四）。轉變並非一次完成，現行環境仍保留早期結構與未明異常。不能因近期傷亡下降，就推定舊機制已失效。</p></details>
+<details open><summary>樓層規則的轉變</summary><p>其後規則逐步放寬（原因與一名探員和 Shade 的長期接觸有關，見${L('fc','契約與人員紀錄')}；變化經過見${L('hist','樓層歷史')}階段四）。轉變並非一次完成，現行環境仍保留早期結構與未明異常。不能因近期傷亡下降，就推定舊機制已失效。</p></details>
 <details open><summary>已確認的致命風險</summary><ul>
 <li><b>死亡條件不告知</b>：部分房間沒有可辨識的完成條件，倒數可能先於任何說明開始；出口有時在進入者放棄之後才出現。</li>
 <li><b>出口限額</b>：曾有六人探索隊進入某房間，出口僅容一人通過，無其他出口，也無可破壞的牆面；倒數結束後房間縮小，最終只有一人離開。</li>
@@ -416,7 +416,7 @@ f2:{n:'研究訪談',l:2,h:()=>`<h2>訪談紀錄</h2><div class="meta"><div><i>�
 <div class="stamps"><span class="stamp">機密</span><span class="stamp s2">研究部存檔</span><span class="stamp s3">部分刪減</span><span class="stamp s2">已核對轉寫</span></div>
 <details open><summary>第一次進入 <span class="stamp in s2">轉寫完成</span></summary>${dlg('研究員','你第一次進去的時候，樓層就是現在這個樣子嗎？')}${dlg('特工','不是。一開始的房間倒是差不多，讓人以為這裡還沒裝潢完。然後門一開，裡面就完全不是那麼回事了。')}${dlg('特工','限時、二選一、合作、逃生，什麼都有。像是明明走了十分鐘，回頭卻發現自己還站在原地，那還算是比較簡單的。')}</details>
 <details><summary>致命實驗</summary>${iv(`研:你是否曾在樓層裡遭遇致命性的實驗？\n特:有，不只一次。有些房間會讓人搞不清楚該做什麼，倒數就先開始了。\n研:如果選錯了？\n特:看房間。有的只是受傷，有的就沒那麼幸運了。\n研:你能接受其他人遭受這種結果嗎？\n特:接受？很難吧。怎麼可能束手旁觀。`)}${`<span class="ann">〔話題轉到傷亡時笑意明顯收斂，此題回答直接，不帶玩笑。〕</span>`}${iv(`研:即使會影響你自己的生存機率？\n特:要是每次都先算機率，我大概早就不在這裡了。`)}</details>
-<details><summary>關於 Shade</summary>${iv(`研:你與它是什麼關係？\n特:關係？朋友吧。不然要怎麼說？`)}${`<span class="ann">〔對「關係」一題以反問與笑聲緩衝，未給出任何定義。〕</span>`}${iv(`研:你認為它具有敵意嗎？\n特:比較難說，因為它不太懂人類。它知道一個人在害怕、在受傷，卻不一定知道那代表什麼。它很危險，這點我沒有否認，不過危險和不懂事，其實可以同時成立。\n研:它為什麼進行那些實驗？\n特:大概是它想更了解人類是什麼吧。\n研:包括你？\n特:尤其是我吧。\n研:為什麼是你？\n特:……這個，下一題吧。`)}<span class="ann">〔停頓約五秒，未回答，要求換題。〕</span></details>
+<details><summary>關於 Shade</summary>${iv(`研:你與它是什麼關係？\n特:關係？朋友吧。不然要怎麼說？`)}${`<span class="ann">〔對「關係」一題以反問與笑聲緩衝，未給出任何定義。〕</span>`}${iv(`研:你認為它具有敵意嗎？\n特:比較難說，因為它不太懂人類。它知道一個人在害怕、在受傷，卻不一定知道那代表什麼。\n研:它為什麼進行那些實驗？\n特:大概是它想更了解人類是什麼吧。\n研:包括你？\n特:尤其是我吧。\n研:為什麼是你？\n特:……這個，下一題吧。`)}<span class="ann">〔停頓約五秒，未回答，要求換題。〕</span>${dlg('特工','它像是從來沒有人教過它怎麼跟別人相處。')}${dlg('研究員','所以你把它當成還在學習怎麼與人相處的對象？')}${dlg('特工','它很危險，這點我沒有否認。不過危險和不懂事，其實可以同時成立。')}</details>
 <details><summary>研究部側寫：實體的對話特徵 <span class="stamp in s2">側寫</span></summary><p>初次接觸的錄音見通訊紀錄 01。實體的對話特徵見${L('shade','實體觀測檔案')}「回應的共同特徵」。後續片段中它向特工詢問大量問題：人類為什麼會在恐懼時發笑、為什麼會幫助陌生人、為什麼會對沒有實際用途的事物感興趣、為什麼在明知可能失敗時繼續嘗試、為什麼需要名字。它對恐懼、同情與好奇有自己的理解方式，但與人類的情緒並不相同。</p></details>
 <details><summary>實驗與解剖</summary>${iv(`研:它是否曾提出要解剖你？\n特:提過。我沒同意啦。它說：「可是我會讓你活著。」\n研:你如何阻止它？\n特:跟它說不行。以前要說很多次，現在它聽得進去了。`)}</details>
 <details><summary>能力與物理攻擊</summary>${dlg('特工','空間那邊比較好懂：牆不見、走廊變長、出口跑到另一邊，它也能直接把人搬去別的地方。靈魂那邊碰到的是更裡面的東西，不是被刀劃到的感覺。')}${dlg('特工','物理攻擊的話，就像打空氣。刀子穿過去，它連躲都不用躲。')}${dlg('研究員','你認為它能被殺死嗎？')}${dlg('特工','不知道。我也沒打算試。')}${dlg('研究員','你的鐮刀呢？')}${dlg('特工','這個我就不回答了，好嗎？我還想繼續跟它做朋友。')}</details>
@@ -424,9 +424,9 @@ f2:{n:'研究訪談',l:2,h:()=>`<h2>訪談紀錄</h2><div class="meta"><div><i>�
 <details><summary>契約與個人資料 <span class="stamp in">已刪減</span><span class="stamp in s3">機密</span></summary><p>此部分問答涉及契約與個人資料，列為高度機密，不在本檔案收錄，節錄見${L('fc','契約與人員紀錄')}。</p></details>
 <details><summary>如果它再開始實驗</summary>${dlg('研究員','你會怎麼做？')}${dlg('特工','我會回去。總得有人跟它說不行吧。')}${dlg('研究員','你不認為 M.E.G.CN 可以處理？')}${dlg('特工','可以啊。不過你們得先找到一個能跟它好好說話的人，那比較難。')}</details>
 <div class="card">研究部建議：不得強制檢查、不得要求以武力測試 Shade、不得將受訪者視為唯一接觸手段；大規模異常時先通知他，而非派武裝小隊。</div><div class="srow"><span class="stamp s2">已核閱</span><span class="stamp s3">結束訪談</span></div>`},
-fc:{n:'契約與人員紀錄',l:3,h:()=>`<h2>機密檔案：契約與相關人員紀錄</h2><div class="meta"><div><i>文件等級</i>高度機密</div><div><i>資料來源</i>特工口述、異常痕跡、未公開紀錄</div><div><i>契約成立</i>20██/04/16（前年度；對應通訊紀錄 05）</div></div>
+fc:{n:'契約與人員紀錄',l:3,h:()=>`<h2>機密檔案：契約與相關人員紀錄</h2><div class="meta"><div><i>文件等級</i>高度機密</div><div><i>資料來源</i>特工口述、異常痕跡、未公開紀錄</div><div><i>契約成立</i>20██/04/16（前年度；對應${L('rec','通訊紀錄 05','05')}）</div></div>
 <div class="chips toc"><a href="#" class="chip" data-j="fc-sum">契約概要</a><a href="#" class="chip" data-j="fc-ppl">相關人員紀錄</a><a href="#" class="chip" data-j="fc-body">契約與身體異化</a><a href="#" class="chip" data-j="fc-eval">研究部評估</a><a href="#" class="chip" data-j="fc-int">訪談與補問</a><a href="#" class="chip" data-j="fc-app">音訊對照與附錄</a></div>
-<div class="card"><b>機密事件先後表</b><ol class="tl"><li>契約成立前　初次接觸（${L('rec','通訊紀錄 01','01')}）</li><li>前年度 04/16　契約成立（${L('rec','通訊紀錄 05','05')}）</li><li>前年度 04/18　TG-P-07 特殊實驗中止；裝置停止、出口開啟後，白日之影詢問特工是否願意繼續，特工首次在正式錄音中明確拒絕恢復實驗（${L('rec','通訊紀錄 06','06')}）</li><li>前年度 05/09　取暱稱的過程（${L('rec','通訊紀錄 P-01','P-01')}；錄製時刻不明）</li><li>前年度 10–11 月起　規則放寬的早期跡象（${L('hist','樓層歷史')}階段四）</li><li>今年度 09/12　根基事件（${L('inc','根基事件')}）</li><li>今年度 09/21、09/28　研究訪談與補問（${L('f2','研究訪談')}）</li></ol></div>
+<div class="card"><b>機密事件先後表</b><ol class="tl"><li>契約成立前　初次接觸（${L('rec','通訊紀錄 01','01')}）</li><li>前年度 04/16　契約成立（${L('rec','通訊紀錄 05','05')}）</li><li>前年度 04/18　TG-P-07 特殊實驗中止；裝置停止、出口開啟後，白日之影詢問特工是否願意繼續，特工首次在正式錄音中明確拒絕恢復實驗（${L('rec','通訊紀錄 06','06')}）</li><li>前年度 05/09　取暱稱的過程（${L('rec','通訊紀錄 P-01','P-01')}；錄製時刻不明）</li><li>前年度 10–11 月起　規則放寬的早期跡象（${L('hist','樓層歷史')}階段四）</li><li>今年度 09/12　根基事件（${L('inc','根基事件')}）</li><li>今年度 09/21、09/28　研究訪談與補問（${L('f2','研究訪談')}）</li><li>歸檔後　未歸檔資料 U-005（下方附錄 D）</li></ol></div>
 <h3 id="fc-sum">契約概要</h3>
 <p>特工於 Level -616「實驗場」與白日之影建立契約。REC-05 的錄音顯示，白日之影當時承諾：「在我的層級，在我看得到的地方，不會再有人死在我的實驗裡。」另有契約痕跡顯示，特工須持續接受實體觀察；但此條件並未完整收錄於 REC-05 本段錄音，其具體形成方式仍有待確認。REC-05 明確記錄的是白日之影對實驗死亡的自我約束承諾，並未表示所有傷害都會停止；後續行為改善與契約條件是否完全相同，仍應分開判讀。</p>
 <p>契約成立後，雙方均受到異常影響（特工身上的變化見下方「契約與身體異化」）；此外，實體似乎能在特定情況下干涉其周遭環境，曾多次出現出口異常生成、陷阱失效及致命攻擊偏移等紀錄。</p>
@@ -452,12 +452,13 @@ fc:{n:'契約與人員紀錄',l:3,h:()=>`<h2>機密檔案：契約與相關人�
 <div class="card">訪談後備註：特工多次以玩笑轉移話題，但在涉及契約與個人資料時明顯較為謹慎，並主動要求結束訪談。研究部認為雙方存在長期且複雜的關係，不建議進一步要求公開契約細節。</div>
 <h3 id="fc-app">音訊對照與附錄</h3>
 <details><summary>SEC-A03 與 TG-AUD-003 的對照</summary>M.E.G.CN 保存的 SEC-A03（完整度約 78%）中，取暱稱的過程從「Shade，怎麼樣？」開始，之前有一段短暫雜音。它與紀錄 P-01 是同一事件的不同完整度版本，缺漏處正是「Shadow」那一段。</details>
-
+<details id="fc-appd"><summary>附錄 D：內部通訊 INT-L-616-04 <span class="stamp in s2">疑似補寫</span><span class="stamp in">來源不明</span></summary><span class="ann">〔查無對應的發送與接收紀錄；發言代號與研究部名冊不符。此段於歸檔後出現，來源待查。〕</span>${dlg('研究員 A','我們目前仍然無法確認他的能力來源。')}${dlg('研究員 B','但他顯然知道那個存在。')}${dlg('研究員 A','知道不代表能夠控制。如果那個存在能夠透過他影響我們呢？')}${dlg('研究員 B','那就繼續觀察。至少目前為止，他救過的人比他帶來的麻煩多得多。')}${dlg('研究員 C','那我們應該把他當成什麼？')}${dlg('研究員 B','他仍然是我們的特工。')}<span class="ann">〔已列入${L('unf','未歸檔資料')}（U-005）。〕</span></details>
+<details id="fc-appe"><summary>附錄 E：無人操作的通訊紀錄 REC-L-616-UNKNOWN</summary>M.E.G.CN 通訊設備在無人操作時自行啟動，錄到一個未知聲音：「他今天沒有回來。」短暫停頓。「以前會。」約十秒後：「你們知道他去哪裡了嗎？」設備隨即自行關閉，聲音與白日之影一致。</details>
 <div class="card warn">研究部：以上內容不得作為特工與 Shade 完全互信的證據。雙方在人類生命、身體自主、疼痛與姓名的意義上仍有明顯認知差異。任何人不得擅自以特工的名義向 Shade 提出要求。</div>`},
 
 hist:{n:'樓層歷史',l:1,h:()=>`<h2>樓層歷史</h2><div class="meta"><div><i>歷史最高評估</i>Class 5</div><div><i>資料管理單位</i>M.E.G.CN 康幕委員會（最高管理層）</div></div>
 <p class="lgd">依時間順序整理。危險機制、傷亡案例與研究部判斷見${L('f1','早期危險評估')}。</p>
-<details><summary>不以實體現身為前提的樓層特徵</summary><p>即使沒有觀測到白日之影直接現身，Level -616 仍反覆呈現幾項可獨立記錄的現象：空間連接不遵循固定平面、房間外觀與用途可能錯置、出口會在條件成立後出現，以及計時、記憶與感官狀態可能異常（見${L('space','空間結構')}、${L('anom','特殊物品與特殊狀態')}）。這些是樓層現象的描述，不代表它們與白日之影彼此獨立；實體與樓層根基的因果關係仍是研究部的主要假說之一。</p><p>因此，研究紀錄應先描述「發生了什麼」，再另列「可能由誰或何種機制造成」。目前沒有足夠證據將每一項異常都直接歸因於白日之影。</p></details>
+<details><summary>不以實體現身為前提的樓層特徵</summary><p>即使沒有觀測到白日之影直接現身，Level -616 仍反覆呈現幾項可獨立記錄的現象：空間連接不遵循固定平面、房間外觀與用途可能錯置、出口會在條件成立後出現，以及計時、記憶與感官狀態可能異常（見${L('space','空間結構')}、${L('anom','特殊物品與特殊狀態')}）。實體與樓層根基的因果關係仍是研究部的主要假說之一。</p></details>
 <details open><summary><span class="sum-code">階段一</span>最初發現（約 1936 年起）</summary><p>最早期的探索紀錄已無法完整追溯。樓層在建立編號之前，就已出現在流浪者的口述中。早期倖存者的描述共通處：進入封閉的空房間、沒有出口指示、離開後進入規則各異的空間、經常在不知情下被迫參與測試，部分房間極度致命且無法中止。</p><p>它曾被稱為「考場」「白色迷宮」「審判室」。「實驗場」一詞最早見於研究部早期的調查紀錄，因最貼近內部運作而被採用。</p></details>
 <details><summary><span class="sum-code">階段二</span>早期樓層狀態（約 1952–1987 年）</summary><p>當時規則不穩定：倒數歸零卻無事發生；通過的房間重新出現且結構不同；試煉結束後仍被迫留在原地；出口在參與者死亡後才開啟；空房間裡聽見交談聲。死亡人數不詳，早期資料缺乏統一的紀錄標準；詳細紀錄見${L('f1','早期危險評估')}。</p></details>
 <details><summary><span class="sum-code">階段三</span>M.E.G.CN 初期調查（約 1988–2019 年）</summary><p>首批小隊的目標是探明空間結構、分類危險程度、整理規則、尋找穩定出口，並查明是否有智慧實體。多支隊伍失聯，或離開後無法描述房間。早期證詞反覆出現：「房間好像知道我們在做什麼。」當時被歸為高壓下的主觀感受。</p></details>
@@ -471,31 +472,30 @@ exp:{n:'探索紀錄',l:1,i(){$('#rd').onclick=e=>{e.target.textContent='不要�
 <details id="ex-04"><summary>EX-04 沒有正確答案的題目</summary><p class="lgd"><span class="sq">前年度・序 4</span>房間：選擇房間　日期：20██/11/19　來源：探索者回報<br>人數 4　結果 全員離開　耗時 約 11 小時　傷亡 無</p>螢幕提出 A「協助資源不足的陌生人」與 B「離開並保留資源」。隊伍討論四十分鐘後選擇 A，房間沒有立即反應；螢幕接著問：「為什麼？」二十秒後出口開啟。現有紀錄未能證明房間設有預設答案。</details>
 <details id="ex-05"><summary>EX-05 兩份相同的答案</summary><p class="lgd"><span class="sq">今年度・序 5</span>房間：選擇房間　日期：20██/01/13　來源：探索者回報<br>人數 4　結果 全員離開　耗時 約 5 小時　傷亡 無</p>每人獨立輸入「最值得信任的人」，螢幕顯示的四份答案完全相同，時間戳記一致，而且有人說自己並沒有選那個人。答案沒有被修改，結果由房間統一。</details>
 <details id="ex-06"><summary>EX-06 沒有完成的第七項試煉</summary><p class="lgd"><span class="sq">今年度・序 6</span>房間：白房間　日期：20██/01/23 00:47　來源：探索者回報<br>人數 6　結果 全員離開　耗時 約 18 小時　傷亡 無</p>第六項之後進入白房，紙上寫：「你們已經完成了。」隊伍以為這是第七項，一名隊員說：「那就走吧。」原本不存在的出口隨即出現。<p class="note">檔案時間戳與 PRV-03 同為 20██/01/23 00:47；由於兩份紀錄的時鐘校準狀態不明，且樓層空間並非線性，無法確認兩件事是否發生於同一實際時刻。</p></details>
-<details id="ex-07"><summary>EX-07 房間的回應</summary><p class="lgd"><span class="sq">今年度・序 7、11、12</span>房間：觀察房間／問答房間　日期：20██/02/09、20██/07/15、20██/08/17　來源：探索者回報<br>人數 1／1／3　結果 皆成功離開　耗時 約 10 小時／2 小時／7 小時　傷亡 無</p>
-<p><b>空房間的聲音</b>：空白房間，三十分鐘後有聲音問：「你在等什麼？」「為什麼？」「那為什麼不繼續？」探索者答：「因為我不想死在這裡。」長沉默後聲音說：「知道了。」十秒後出口開啟。推測聲音來自白日之影。</p>
-<p><b>不需要回答</b>：紙上問：「你為什麼來到這裡？」探索者不作答，文字消失後又問：「你不想回答嗎？」他說：「不知道也可以吧。」紙上最後出現「可以。」</p>
-<p><b>不需要說實話</b>：三個問題：是否拋棄過需要幫助的人、是否為自身安全隱瞞資訊、是否認為所有選擇都正確。回答完畢後牆面顯示：「你們不需要說實話。」無任何懲罰。</p>
-<p class="note">三次都發生在沒有明確任務的房間。研究部暫將沉默記為該次房間接受的回應，尚不能推定所有問答房間都採用相同規則。</p></details>
+<details id="ex-07"><summary>EX-07 空房間裡的聲音</summary><p class="lgd"><span class="sq">今年度・序 7</span>房間：觀察房間　日期：20██/02/09　來源：探索者回報<br>人數 1　結果 成功離開　耗時 約 10 小時　傷亡 無</p>空白房間，三十分鐘後有聲音問：「你在等什麼？」「為什麼？」「那為什麼不繼續？」探索者答：「因為我不想死在這裡。」長沉默後聲音說：「知道了。」十秒後出口開啟。推測聲音來自白日之影。</details>
 <details id="ex-08"><summary>EX-08 第七十二小時</summary><p class="lgd"><span class="sq">今年度・序 8</span>房間：限時房間　日期：20██/03/02–03/05　來源：回收影像<br>人數 2　結果 全員離開　耗時 約 3 日　傷亡 一人輕傷</p>生活設備齊全的房間，倒數 72:00:00。倒數剩約三小時時，螢幕關閉，床下出現檢修門。回收影像顯示該門早已存在，但先前影像裡那處地板完整。</details>
 <details id="ex-09"><summary>EX-09 不存在的隊友</summary><p class="lgd"><span class="sq">今年度・序 9</span>房間：記憶與感知房間　日期：20██/04/06　來源：探索者回報<br>人數 5　結果 全員離開　耗時 約 13 小時　傷亡 無</p>六張椅、六份資料，其中一份屬於名單上沒有的人，卻包含完整姓名與經歷。第六張椅自行後移，文件消失。事後有隊員問：「我們原本是不是有六個人？」</details>
 <details id="ex-10"><summary>EX-10 第三個人</summary><p class="lgd"><span class="sq">今年度・序 10</span>房間：合作房間　日期：20██/05/27　來源：回收影像<br>人數 3　結果 2 人離開，1 人失蹤　耗時 約 6 小時　傷亡 1 人失蹤</p>三張椅子，螢幕稱「尚有一位參與者未就座」。一名隊員轉向空牆角與看不見的對象交談，說出「你不是已經坐下了嗎？」，約四十秒後從影像中消失。</details>
-<details id="ex-11"><summary>EX-11 初始房間</summary><p class="lgd"><span class="sq">今年度・序 16</span>房間：初始房間　日期：20██/10/05　來源：探索者回報<br>人數 小隊　結果 全員通過　耗時 約 6 分鐘　傷亡 無</p>小隊皆出現在白色立方體；有人輕敲牆面，確認無中空（不建議）。約六分鐘後右側出現門，門後是普通辦公室。該次紀錄未觀察到危險。</details>
-<details id="ex-12"><summary>EX-12 異常出口</summary><p class="lgd"><span class="sq">今年度・序 17</span>房間：異常房間　日期：20██/10/12　來源：探員回報<br>人數 1 名探員　結果 第二次通過後抵達另一樓層　耗時 未載　傷亡 無</p>探員第一次通過出口，抵達與原本相同的走廊；返回確認無變化，第二次通過卻抵達另一樓層。</details>
-<details id="ex-13"><summary>EX-13 實體接觸</summary><p class="lgd"><span class="sq">今年度・序 18</span>房間：觀察房間　日期：20██/10/26　來源：探索者回報<br>人數 1 人　結果 第二扇門出現　耗時 未載　傷亡 無</p>${dlg('聲音','你為什麼不走？')}${dlg('流浪者','我在等同伴。')}沉默約十秒後，房間出現第二扇門。</details>
-<details id="ex-14"><summary>EX-14 實驗中止</summary><p class="lgd"><span class="sq">今年度・序 19</span>房間：未載　日期：20██/11/02　來源：探索者回報<br>人數 1 人　結果 實驗中止，出口開啟　耗時 未載　傷亡 精神狀態到達極限</p>流浪者的精神狀態到達極限，所有裝置停止，出口開啟。離開前聽見：「結束了。」</details>
-<details id="ex-15"><summary>EX-15 行為與關係房間</summary><p class="lgd"><span class="sq">今年度・序 20、21、23</span>房間：陪伴房間／勞務房間／休息房間　日期：20██/11/05、20██/11/09、20██/11/18　來源：探索者回報<br>人數 2／4／5　結果 皆全員離開　耗時 約 4 小時／14 小時／10 小時　傷亡 無／一人手部扭傷／無</p>
-<p><b>陪伴</b>：病房般的房間，床上沒有人，床邊有一張椅子。兩人互相推讓，檢查床單、尋找暗門，一無所獲。其中一人說自己累了，坐下；十分鐘後另一人也坐下，沒有人說話。約四小時後，床頭櫃上出現一杯溫水，牆面出現門。房間全程沒有給任何指示。</p>
-<p><b>勞務</b>：倉庫裡堆滿相同的紙箱，牆上標示要把它們搬到對面牆邊。隊伍先找暗號、數箱子、拆箱（皆為空箱），三小時後有人決定單純搬運，眾人輪流休息。途中有人說「不搬了」，牆面沒有反應，隊伍討論後決定繼續。最後一箱放下時對牆打開，牆上寫著：「謝謝。」</p>
-<p><b>休息</b>：有五張床與熱食的房間。隊員輪流警戒，沒有任何事發生。全員睡過一輪後，床頭燈熄滅，門出現。事後有人表示，那是離開樓層前最後一次真正睡著。</p>
-<p class="note">判讀限制：勞務一案只能確認「完成搬運後出口開啟」。隊員曾提出停止，但最後沒有實際中止工作，因此不能據此宣稱中途放棄也能離開；房間是否在評估合作、耐心、勞務完成或其他因素，仍未確認。</p></details>
-<details id="ex-16"><summary>EX-16 沒有回音的走廊</summary><p class="lgd"><span class="sq">今年度・序 24</span>房間：過渡空間　日期：20██/11/20　來源：回收紀錄儀（未見人員）<br>人數 2（推估）　結果 失聯　耗時 紀錄儀持續運作 19 小時　傷亡 未確認</p>兩名非組織流浪者的隨身錄音設備在 Level 2 管線區被拾獲。音檔顯示兩人在白色長廊中以固定步速前進，每隔十分鐘報一次數，直到第 64 次報數後，其中一人的腳步聲突然中斷，另一人並未察覺，仍獨自繼續報數至電量耗盡。全程未觀測到實體介入跡象。</details>
-<details id="ex-17"><summary>EX-17 雙向門牌</summary><p class="lgd"><span class="sq">今年度・序 25</span>房間：空間結構異常　日期：20██/11/21　來源：測繪組無人機紀錄<br>人數 0（無人機）　結果 訊號中斷　耗時 43 分鐘　傷亡 無</p>無人機沿同一條直線走廊飛行，連續通過七扇標有「出口」的門牌，每次穿過後測繪儀顯示座標完全未變，但畫面中的牆面踢腳線高度逐次上升約三公分。第七次穿過後，鏡頭畫面被純白填滿，隨後訊號切斷。</details>
+<details id="ex-11"><summary>EX-11 不需要回答</summary><p class="lgd"><span class="sq">今年度・序 11</span>房間：觀察房間　日期：20██/07/15　來源：探索者回報<br>人數 1　結果 成功離開　耗時 約 2 小時　傷亡 無</p>紙上問：「你為什麼來到這裡？」探索者不作答，文字消失後又問：「你不想回答嗎？」他說：「不知道也可以吧。」紙上最後出現「可以。」研究部暫將沉默記為該次房間接受的回應，尚不能推定所有問答房間都採用相同規則。</details>
+<details id="ex-12"><summary>EX-12 不能說謊的房間</summary><p class="lgd"><span class="sq">今年度・序 12</span>房間：問答房間　日期：20██/08/17　來源：探索者回報<br>人數 3　結果 全員離開　耗時 約 7 小時　傷亡 無</p>三個問題：是否拋棄過需要幫助的人、是否為自身安全隱瞞資訊、是否認為所有選擇都正確。回答完畢後牆面顯示：「你們不需要說實話。」無任何懲罰。</details>
+<details id="ex-13"><summary>EX-13 初始房間</summary><p class="lgd"><span class="sq">今年度・序 16</span>房間：初始房間　日期：20██/10/05　來源：探索者回報<br>人數 小隊　結果 全員通過　耗時 約 6 分鐘　傷亡 無</p>小隊皆出現在白色立方體；有人輕敲牆面，確認無中空（不建議）。約六分鐘後右側出現門，門後是普通辦公室。該次紀錄未觀察到危險。</details>
+<details id="ex-14"><summary>EX-14 異常出口</summary><p class="lgd"><span class="sq">今年度・序 17</span>房間：異常房間　日期：20██/10/12　來源：探員回報<br>人數 1 名探員　結果 第二次通過後抵達另一樓層　耗時 未載　傷亡 無</p>探員第一次通過出口，抵達與原本相同的走廊；返回確認無變化，第二次通過卻抵達另一樓層。</details>
+<details id="ex-15"><summary>EX-15 實體接觸</summary><p class="lgd"><span class="sq">今年度・序 18</span>房間：觀察房間　日期：20██/10/26　來源：探索者回報<br>人數 1 人　結果 第二扇門出現　耗時 未載　傷亡 無</p>${dlg('聲音','你為什麼不走？')}${dlg('流浪者','我在等同伴。')}沉默約十秒後，房間出現第二扇門。</details>
+<details id="ex-16"><summary>EX-16 實驗中止</summary><p class="lgd"><span class="sq">今年度・序 19</span>房間：未載　日期：20██/11/02　來源：探索者回報<br>人數 1 人　結果 實驗中止，出口開啟　耗時 未載　傷亡 精神狀態到達極限</p>流浪者的精神狀態到達極限，所有裝置停止，出口開啟。離開前聽見：「結束了。」</details>
+<details id="ex-17"><summary>EX-17 沒有任務的長椅</summary><p class="lgd"><span class="sq">今年度・序 20</span>房間：陪伴房間　日期：20██/11/05　來源：探索者回報<br>人數 2　結果 全員離開　耗時 約 4 小時　傷亡 無</p>病房般的房間，床上沒有人，床邊有一張椅子。兩人互相推讓，檢查床單、尋找暗門，一無所獲。其中一人說自己累了，坐下；十分鐘後另一人也坐下，沒有人說話。約四小時後，床頭櫃上出現一杯溫水，牆面出現門。房間全程沒有給任何指示。<p class="note">判讀限制：現有紀錄無法確認出口出現的觸發條件是停留時間、陪伴行為，或其他未觀測因素。</p></details>
+<details id="ex-18"><summary>EX-18 一千個箱子</summary><p class="lgd"><span class="sq">今年度・序 21</span>房間：勞務房間　日期：20██/11/09　來源：探索者回報<br>人數 4　結果 全員離開　耗時 約 14 小時　傷亡 一人手部扭傷</p>倉庫裡堆滿相同的紙箱，牆上標示要把它們搬到對面牆邊。隊伍先找暗號、數箱子、拆箱（皆為空箱），三小時後有人決定單純搬運，眾人輪流休息。途中有人說「不搬了」，牆面沒有反應，隊伍討論後決定繼續。最後一箱放下時對牆打開，牆上寫著：「謝謝。」<p class="note">判讀限制：本次紀錄只能確認「完成搬運後出口開啟」。隊員曾提出停止，但最後沒有實際中止工作，因此不能據此宣稱中途放棄也能離開；房間是否在評估合作、耐心、勞務完成或其他因素，仍未確認。</p></details>
+<details id="ex-19"><summary>EX-19 第七號帶子</summary><p class="lgd"><span class="sq">今年度・序 22</span>房間：見證房間　日期：20██/11/14　來源：探索者回報<br>人數 3　結果 全員離開　耗時 約 5 小時　傷亡 無</p>空房間裡有一台播放機，播放一名陌生人的口述，內容與任何隊員無關。每隔數分鐘暫停，等待有人回應。隊伍決定輪流聽完並簡短記下重點。全部結束後，播放機吐出一張紙：「記得就夠了。」</details>
+<details id="ex-20"><summary>EX-20 可以睡覺的房間</summary><p class="lgd"><span class="sq">今年度・序 23</span>房間：休息房間　日期：20██/11/18　來源：探索者回報<br>人數 5　結果 全員離開　耗時 約 10 小時　傷亡 無</p>有五張床與熱食的房間。隊員輪流警戒，沒有任何事發生。全員睡過一輪後，床頭燈熄滅，門出現。事後有人表示，那是離開樓層前最後一次真正睡著。<p class="note">判讀限制：隊伍有輪流警戒，不能據此推定所有休息房間都安全。</p></details>
+<details id="ex-21"><summary>EX-21 沒有回音的走廊</summary><p class="lgd"><span class="sq">今年度・序 24</span>房間：過渡空間　日期：20██/11/20　來源：回收紀錄儀（未見人員）<br>人數 2（推估）　結果 失聯　耗時 紀錄儀持續運作 19 小時　傷亡 未確認</p>兩名非組織流浪者的隨身錄音設備在 Level 2 管線區被拾獲。音檔顯示兩人在白色長廊中以固定步速前進，每隔十分鐘報一次數，直到第 64 次報數後，其中一人的腳步聲突然中斷，另一人並未察覺，仍獨自繼續報數至電量耗盡。全程未觀測到實體介入跡象。</details>
+<details id="ex-22"><summary>EX-22 雙向門牌</summary><p class="lgd"><span class="sq">今年度・序 25</span>房間：空間結構異常　日期：20██/11/21　來源：測繪組無人機紀錄<br>人數 0（無人機）　結果 訊號中斷　耗時 43 分鐘　傷亡 無</p>無人機沿同一條直線走廊飛行，連續通過七扇標有「出口」的門牌，每次穿過後測繪儀顯示座標完全未變，但畫面中的牆面踢腳線高度逐次上升約三公分。第七次穿過後，鏡頭畫面被純白填滿，隨後訊號切斷。</details>
 <h3>M.E.G.CN 現行評估</h3><p>評估範圍與風險說明見${L('home','樓層概述')}。<span class="red" id="rd">████████</span>（點擊）</p>`},
 anom:{n:'特殊物品與特殊狀態',l:1,h:()=>`<h2>特殊物品與特殊狀態</h2>
 <details id="i-01" open><summary>I-01 未完成的門</summary>缺少完整門扇與門框的入口，無把手，無法以工具破壞，門框內是無法辨識的空間，並非始終存在。一支四人隊伍中，兩人看得見門框，另外兩人看見的牆面毫無變化。它不是有效出口。</details>
-<details id="i-02"><summary>I-02 停止的計時器</summary>顯示時間與外界不一致：倒數停止但人可正常活動；歸零後無事發生；顯示持續增加的負數；拆除後仍在原處顯示數字；不同人看見不同的時間。</details>
-<details id="i-03"><summary>I-03 觀測窗口</summary>普通玻璃窗，另一側是獨立的房間，可看見其他隊伍試煉，對方似乎無法察覺觀測者。部分畫面並非即時：窗內隊伍的動作與數小時前回收的影像完全一致。</details>
-<details id="i-04"><summary>I-04 行為矯正錄音與空白紀錄器</summary><p><b>行為矯正錄音</b>：一組共七段的音訊檔案，格式不明，無建立日期、錄製設備或持有者資訊，僅以 01 至 07 編號。可正常播放，但無法複製到實驗場以外的儲存設備；部分檔案播放結束後會自行重新排列。內容為一名男性與未知實體的對話，音檔收錄於通訊紀錄「I-04 行為矯正錄音」。</p><p><b>空白紀錄器</b>：外觀似一般紀錄器，研究部推測可能與白日之影有關，目前尚未確認設置者；只能錄音。探索者離開房間後，部分設備會自動生成不超過十秒的音訊：「他沒有回答。」「這次不一樣。」「還可以繼續。」「已經結束了。」「下一個。」</p></details>
+<details id="i-02"><summary>I-02 空白紀錄器</summary>外觀似一般紀錄器，研究部推測可能與白日之影有關，目前尚未確認設置者；只能錄音。探索者離開房間後，部分設備會自動生成不超過十秒的音訊：「他沒有回答。」「這次不一樣。」「還可以繼續。」「已經結束了。」「下一個。」</details>
+<details id="i-03"><summary>I-03 停止的計時器</summary>顯示時間與外界不一致：倒數停止但人可正常活動；歸零後無事發生；顯示持續增加的負數；拆除後仍在原處顯示數字；不同人看見不同的時間。</details>
+<details id="i-04"><summary>I-04 觀測窗口</summary>普通玻璃窗，另一側是獨立的房間，可看見其他隊伍試煉，對方似乎無法察覺觀測者。部分畫面並非即時：窗內隊伍的動作與數小時前回收的影像完全一致。</details>
+<details id="i-05"><summary>I-05 多餘的鑰匙</summary>無法對應任何已知門鎖，不開啟房間內原有的門，但持有期間，所在房間的部分異常會暫時停止活動。</details>
+<details id="i-06"><summary>I-06 行為矯正錄音</summary>一組共七段的音訊檔案，格式不明，無建立日期、錄製設備或持有者資訊，僅以 01 至 07 編號。可正常播放，但無法複製到實驗場以外的儲存設備；部分檔案播放結束後會自行重新排列。內容為一名男性與未知實體的對話，音檔收錄於通訊紀錄「I-06 行為矯正錄音」。</details>
 <h2 style="margin-top:1.6em">特殊狀態</h2>
 <details id="s-01"><summary>S-01 被注視</summary><p class="lgd">感官干涉　觸發：長時間處於具觀察性質的房間，或被未知存在持續注視</p><p><b>症狀</b>：覺得牆上的畫像在注視自己、身後有人移動、物體位置與記憶不同。<b>效果</b>：可能提前察覺異常，也會把正常現象誤判為危險，越來越難分辨真異常與錯覺。<b>解除</b>：離開該房間，並暫停觀察異常物件。</p></details>
 <details id="s-02"><summary>S-02 記憶錯位</summary><p class="lgd">認知干涉　觸發：接觸具記憶重組性質的房間或物品</p><p><b>症狀</b>：把隊友的經歷當成自己的，或記得沒發生過的對話。<b>效果</b>：對錯誤記憶高度確信；多人受影響時記憶會互相矛盾。<b>解除</b>：以外部紀錄、通訊設備或未受影響的隊員確認經歷。</p></details>
@@ -504,8 +504,8 @@ anom:{n:'特殊物品與特殊狀態',l:1,h:()=>`<h2>特殊物品與特殊狀態
 <details id="s-05"><summary>S-05 結果預知</summary><p class="lgd">預知干涉　觸發：接觸具結果預測性質的房間</p><p><b>症狀</b>：推門前看見門後崩塌、聽見隊友尚未說出的話、看見自己倒地。<b>效果</b>：預知未必成真；改變行動可能改變結果，也可能產生新的異常。<b>解除</b>：該房間的實驗結束後消失。</p></details>
 `},
 appx:{n:'研究附錄',l:2,h:()=>`<h2>研究附錄</h2>
-<details><summary>附錄 A：實驗中止協議補充</summary>實驗中止協議觸發後，直到探索者離開該房間前，房間造成的後續傷害會受到限制；協議不會治療既有傷勢，也不代表所有異常效果立即解除。該協議同樣適用於特殊異常個體，相關事件見根基事件。</details>
-<details><summary>附錄 B：關於白日之影的定位</summary>研究部早期曾提出三項假說：樓層管理者、樓層本身產生的意識、外來異常實體。現行結論是：它既不是管理者，也不是單純的樓層意識，而是與樓層共生的獨立個體。它在樓層之外是否有獨立的本體，仍有爭議（見實體觀測檔案）。</details>
+<details id="apx-a"><summary>附錄 A：實驗中止協議補充</summary>實驗中止協議觸發後，直到探索者離開該房間前，房間造成的後續傷害會受到限制；協議不會治療既有傷勢，也不代表所有異常效果立即解除。該協議同樣適用於特殊異常個體，相關事件見根基事件。</details>
+<details id="apx-b"><summary>附錄 B：關於白日之影的定位</summary>研究部早期曾提出三項假說：樓層管理者、樓層本身產生的意識、外來異常實體。現行結論是：它既不是管理者，也不是單純的樓層意識，而是與樓層共生的獨立個體。它在樓層之外是否有獨立的本體，仍有爭議（見實體觀測檔案）。</details>
 <div class="card">最終研究備註：值得持續關注的，不只是房間設備與試煉本身的危險性，也包括長期存在於樓層內的白日之影。M.E.G.CN 建議維持觀察、避免主動干涉。它的能力、限制與代價見${L('shade','實體觀測檔案')}。</div><div class="card warn">契約關係評估、通訊測試與保存音檔對照等資料列為高度機密，見${L('fc','契約與人員紀錄')}。</div>`},
 inc:{n:'根基事件',l:3,h:()=>`<h2>機密檔案：樓層根基完整度異常事件</h2><div class="meta"><div><i>檔案編號</i>M.E.G.CN-INCIDENT-███</div><div><i>事件日期</i>20██/09/12（今年度・序 13；對應通訊紀錄 09）</div><div><i>狀態</i>部分解密</div><div><i>相關</i>特工、白日之影</div></div>
 <details open><summary>樓層根基與兩種判定</summary>實驗場可能存在維持穩定的核心結構「樓層根基」，其位置與外觀均未知。部分紀錄顯示，持續破壞房間、設備與運作結構後，樓層會出現連鎖異常；相較之下，為救援受困者而破壞機關的案例，尚未觀察到明確的根基損傷。兩者差異可能與破壞規模、位置或行為目的有關，但目前無法確認。因此存在兩種機制：<br><b>業力傾向</b>：記錄行動對其他生命造成的影響，包括是否協助他人、傷害生命、為自身利益犧牲他人、承擔後果，以及造成傷害後是否補救；它描述的是行為後果，不等同於單次善惡判決。<br><b>根基完整度</b>：記錄樓層核心結構是否受損，包括破壞核心設備、大規模破壞結構、強行干涉空間連結，以及非必要地破壞穩定。前者偏向行為對生命造成的影響，後者偏向樓層結構本身的狀態。兩者可能互相影響，但目前沒有證據能還原其判定方式，也不能互相替代。</details>
@@ -517,10 +517,11 @@ unf:{n:'未歸檔資料',l:1,h:()=>`<h2>未歸檔資料</h2><div class="meta"><d
 <p>下列項目無法歸入任何正式分類。M.E.G.CN 已複製原始檔案，異常版本獨立封存；內容未經證實。部分條目重新開啟時，位置或字句與上次不同，無法確認哪一版是原始版本。技術組備註：部分文本詞彙與異常能力條目在游標停留或觸碰時會出現輕微殘響，原因待查。</p>
 <details id="u-001" open><summary><span class="sum-code">U-001</span>房間規則</summary><p class="lgd">原始檔案：${L('rules','房間規則')}／異常狀況：頁面末端多出一行字（再次開啟時已不在原位）</p><p class="it">「你們把規則寫得很整齊。」</p></details>
 <details id="u-002"><summary><span class="sum-code">U-002</span>探索紀錄</summary><p class="lgd">原始檔案：${L('exp','探索紀錄')}／異常狀況：頁面末端多出一行字。未能確認「他們」所指的對象</p><p class="it">「他們有離開嗎？」</p></details>
-<details id="u-003"><summary><span class="sum-code">U-003</span>特殊物品</summary><p class="lgd">原始檔案：${L('anom','I-04 空白紀錄器')}／異常狀況：備註欄出現額外文字，數小時後欄位恢復空白</p><p class="it">「我也想錄下來。」</p></details>
+<details id="u-003"><summary><span class="sum-code">U-003</span>特殊物品</summary><p class="lgd">原始檔案：${L('anom','I-02 空白紀錄器')}／異常狀況：備註欄出現額外文字，數小時後欄位恢復空白</p><p class="it">「我也想錄下來。」</p></details>
 <details id="u-004"><summary><span class="sum-code">U-004</span>探索紀錄</summary><p class="lgd">原始檔案：${L('home','Level -616')}／${L('exp','探索紀錄')}／異常狀況：文件末尾出現額外文字；已發現兩個版本，最後一句不同</p><p class="it">「你們把這些東西放在一起。」<br>「我可以看。」<br>「所以我也想知道，你們為什麼要記錄它們。」<br>（另一版：「……為什麼要記錄。」）</p></details>
-<details id="u-005"><summary><span class="sum-code">U-005</span>I-04 行為矯正錄音</summary><p class="lgd">原始檔案：${L('rec','I-04 行為矯正錄音','I-04/01')}／異常狀況：第七段結束後，目錄偶爾多出一個未編號的音訊檔</p><p class="it">（咳。四秒。）</p></details>
-<details id="u-006"><summary><span class="sum-code">U-006</span>（標題缺失）</summary><p class="lgd">原始檔案：無法確認／異常狀況：目錄中有此條目，內容無法開啟；每次查閱時列出的位置不同</p><p class="it">（空白。）</p></details>`},
+<details id="u-005"><summary><span class="sum-code">U-005</span>內部通訊</summary><p class="lgd">原始檔案：${L('fc','契約與人員紀錄')}／附錄 D：INT-L-616-04／異常狀況：歸檔後多出整段對話，發言者不在研究部名冊</p><p class="it">「他仍然是我們的特工。」</p></details>
+<details id="u-006"><summary><span class="sum-code">U-006</span>I-06 行為矯正錄音</summary><p class="lgd">原始檔案：${L('rec','I-06 行為矯正錄音','I-06/01')}／異常狀況：第七段結束後，目錄偶爾多出一個未編號的音訊檔</p><p class="it">（咳。四秒。）</p></details>
+<details id="u-007"><summary><span class="sum-code">U-007</span>（標題缺失）</summary><p class="lgd">原始檔案：無法確認／異常狀況：目錄中有此條目，內容無法開啟；每次查閱時列出的位置不同</p><p class="it">（空白。）</p></details>`},
 rec:{n:'通訊與錄音',l:3,h:()=>recHtml(),i:recInit},
 };
 function go(id){const p=P[id];if(typeof tok!=='undefined')tok++;cur=id;if(p.l>clr){$('#main').innerHTML=`<div class="card warn"><h2>▮ 權限不足</h2>此頁需要權限 ${p.l} 級。你目前為 ${clr} 級。<br><button id="ga">進行認證</button></div>`;$('#ga').onclick=()=>$('#auth').showModal()}
@@ -528,12 +529,12 @@ else{$('#main').innerHTML=p.h()+nxt(id)+rel(id);p.i&&p.i()}
 $('#main').style.animation='none';void $('#main').offsetWidth;$('#main').style.animation='';nav();post();scrollTo(0,0);whisper()}
 const GR=[['01 · 正式資料',['home','rules','space','base','anom','exp','sim']],['02 · 研究資料',['shade','hist','f1','f2','appx']],['03 · 機密檔案',['fc','inc']],['04 · 通訊與音訊',['rec']],['05 · 非正式資料',['unf','talk']]];
 function nav(){const N=$('#nav');N.innerHTML='';GR.forEach(([g,ids])=>{const bs=ids.filter(k=>P[k]&&!(P[k].hid&&!found&&clr<3));if(!bs.length)return;const d=document.createElement('div');d.className='grp';d.innerHTML='<span>'+g+'</span>';bs.forEach(k=>{const p=P[k],b=document.createElement('button');b.textContent=(p.l>clr?'🔒 ':'')+p.n;b.className=(k==cur?'cur ':'')+(p.l>clr?'lock':'');b.onclick=()=>go(k);d.append(b)});N.append(d)});$('#badge').textContent='權限 '+clr+' 級';$('#mt').textContent='☰ 目錄：'+P[cur].n}
-const IDX={};const tx=k=>IDX[k+clr+named]||(IDX[k+clr+named]=(()=>{const d=document.createElement('div');d.innerHTML=P[k].h();return d.textContent.replace(/\s+/g,' ').replace(/Shade/g,(P[k].l==1||!named)?'白日之影':'Shade').replace(/特工/g,AN(k)&&clr<2?'某探員':'特工').replace(/康幕委員會/g,P[k].l==1?'M.E.G.CN':'康幕委員會')})());
+const IDX={};const tx=k=>IDX[k+clr+named]||(IDX[k+clr+named]=(()=>{const d=document.createElement('div');d.innerHTML=P[k].h();return d.textContent.replace(/\s+/g,' ').replace(/Shade/g,(P[k].l==1||!named)?'白日之影':'Shade').replace(/我們的特工/g,AN(k)&&clr<2?'我們的探員':'我們的特工').replace(/特工/g,AN(k)&&clr<2?'某探員':'特工').replace(/康幕委員會/g,P[k].l==1?'M.E.G.CN':'康幕委員會')})());
 function post(){document.querySelectorAll('#main .nm').forEach(e=>e.textContent=clr>=2?'特工':'██');$('#side').classList.remove('open');document.querySelectorAll('#main .q').forEach(q=>{const t=q.firstChild.textContent;q.classList.add(t=='特工'?'qa':/^(Shade|未知)/.test(t)?'qs':'qo')});const m=$('#main'),n=m.querySelectorAll('details').length;if(n>=3&&cur!='rec'&&m.firstElementChild)m.firstElementChild.insertAdjacentHTML('afterend','<p class="tools"><button data-all="1">展開全部</button><button data-all="0">收合全部</button></p>')}
 $('#main').addEventListener('click',e=>{const t=e.target;if(t.dataset.all!=null)document.querySelectorAll('#main details').forEach(d=>d.open=t.dataset.all=='1')});
 const AN=k=>(P[k].l==1&&!['talk','sim'].includes(k))||['f1','appx','inc'].includes(k);
 const need=()=>P[cur]&&(P[cur].l==1||!named||AN(cur));
-const cv=(t,k)=>{if(AN(k)&&clr<2)t=t.replace(/特工/g,'某探員');if(P[k].l==1)t=t.replace(/(?:M\.E\.G\.(?:CN)?\s*)?康幕委員會(?:（最高管理層）)?/g,'M.E.G.CN');return t};
+const cv=(t,k)=>{if(AN(k)&&clr<2)t=t.replace(/我們的特工/g,'我們的探員').replace(/特工/g,'某探員');if(P[k].l==1)t=t.replace(/(?:M\.E\.G\.(?:CN)?\s*)?康幕委員會(?:（最高管理層）)?/g,'M.E.G.CN');return t};
 const entW=r=>{const w=document.createTreeWalker(r,NodeFilter.SHOW_TEXT),L=[];while(w.nextNode())L.push(w.currentNode);L.forEach(n=>{const p=n.parentElement;if(!p||p.closest('#lg0,[data-k],.nm,.keep'))return;const v=cv(n.nodeValue,cur),sh=(P[cur].l==1||!named)&&v.includes('Shade');if(!sh){if(v!==n.nodeValue)n.nodeValue=v;return}const f=document.createDocumentFragment();const pc=v.split('Shade'),CJ='[\u3000-\u9fff，。、：；！？（）「」『』]';for(let q=0;q<pc.length-1;q++){pc[q]=pc[q].replace(new RegExp('('+CJ+') $'),'$1');pc[q+1]=pc[q+1].replace(new RegExp('^ ('+CJ+')'),'$1')}pc.forEach((t,i)=>{if(i){const e=document.createElement('span');e.className='ent';e.title='M.E.G.CN 對它的正式稱呼';e.textContent='白日之影';f.append(e)}f.append(t)});n.replaceWith(f)})};
 let moBusy=false,moLinkQueued=false;new MutationObserver(rs=>{if(moBusy)return;moBusy=true;try{if(need())rs.forEach(r=>{const n=r.type=='characterData'?r.target.parentNode:r.target;if(n&&n.nodeType==1&&n.closest('#main')&&!n.closest('.lg'))entW(n)});if(!moLinkQueued){moLinkQueued=true;requestAnimationFrame(()=>{moLinkQueued=false;if(moBusy)return;moBusy=true;try{linkify();linkIds()}finally{moBusy=false}})}}finally{moBusy=false}}).observe($('#main'),{childList:true,subtree:true,characterData:true});
 function nameIt(){if(named)return;named=true;saveState();document.querySelectorAll('#main .ent').forEach(e=>{if(P[cur].l>1)e.replaceWith('Shade')});toast('特工替它取了暱稱：Shade。隱藏檔案中的稱呼已更新。')}
@@ -612,8 +613,8 @@ function clockEgg(d){if(d.dataset.c)return;d.dataset.c=1;const sp=document.creat
 document.addEventListener('click',e=>{const m=$('#main');if(!m||!m.contains(e.target))return;
 const cell=e.target.closest('.meta div');if(cell&&cur=='shade'){const i=cell.querySelector('i');if(i&&i.textContent=='暱稱')egg('nick','它的名字，是有人替它取的。')}
 const sm=e.target.closest('summary');if(sm){const t=sm.textContent.trim(),d=sm.parentElement;
-if(t.startsWith('I-02'))clockEgg(d);
-else if(t.startsWith('I-03'))egg('win','窗內隊伍的動作與你一致。其中一人朝你看了一眼。');}});
+if(t.startsWith('I-03'))clockEgg(d);
+else if(t.startsWith('I-04'))egg('win','窗內隊伍的動作與你一致。其中一人朝你看了一眼。')}});
 const sbDone={};addEventListener('scroll',()=>{if(sbDone[cur]||cur!='exp')return;const h=document.documentElement;if(h.scrollTop+innerHeight>=h.scrollHeight-60){sbDone[cur]=1;const p=document.createElement('p');p.className='it end';p.textContent='他們有離開嗎？';$('#main').append(p)}});
 let hc=0;$('#redh').onclick=()=>{if(++hc==5){hc=0;toast('筆記本第一頁：「特工」。');$('#main').insertAdjacentHTML('afterbegin','<div class="card"><span data-k>一本沒有署名的筆記本。第一頁被反覆寫下的稱呼：<b>特工</b></span>。</div>')}};
 let tc=0,tt=0;const isDk=()=>document.documentElement.dataset.theme==='dark'||(!document.documentElement.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches);const WH=['這邊。','你為什麼來？','有人不喜歡太亮的燈。我記得。','還能繼續嗎？','你回頭了。','我會等。','你又來了。','你還記得出口在哪嗎？'];
@@ -923,7 +924,7 @@ s|好。
 a|那麼，下次見囉，Shade。
 s|下次見，特工。
 n|07:16　錄音結束。
-i|兩邊的聲音原本是分開的。排在一起，才像在說話。`],
+i|特工那一句，我等了兩秒才接上。他叫我名字的時候，語氣比平常輕。`],
 ['02','實體對人類概念之初步交流','特工聯絡對講機　日常交流<br>檔案：REC-██-02　錄製：20██/03/15　時間不明　時長：00:58<br>來源：特工聯絡對講機　訊號：良好',`n|00:00　開機提示音。背景安靜。
 u|人類為什麼會笑？
 a|嗯？因為有趣啊。
@@ -1021,7 +1022,7 @@ s|畢業？
 n|02:11　收音端安靜下來，約3秒，只有空調般的氣流聲。
 a|……這個以後再解釋。
 n|02:20　椅子（或類似物）被拖動的聲音。錄音在此處結束，未見關機提示。
-i|腳印很淺，收走了。他沒有發現。`],
+i|地上的腳印，我先收走了。他進門時回頭看了一眼地板，什麼也沒說。`],
 ['P-02','界線','特工聯絡對講機　重要交流<br>檔案：PRV-██-02　錄製：20██/12/09 03:40　時長：04:05<br>來源：特工聯絡對講機　訊號：良好',`n|00:00　空調般的低頻聲，持續到錄音結束。
 s|你可以留下。
 a|嗯？
@@ -1106,7 +1107,7 @@ a|沒辦法呀，開店不容易。
 n|05:52　眾人嬉鬧聲。夾雜一陣衣料拉扯聲，疑似有人在整理衣服下襬。
 o|錄音者無意間記下他對「拍照」的反應速度與其餘對話明顯不同，其後立即以玩笑掩飾。推測他拒絕的是背部被拍到，而非料理本身。
 o|研究部：無法確認此能力與背部異常標記是否有關。特工拒絕說明。
-i|罐頭是熱的。熱，是會讓人開口的東西。`],
+i|罐頭放在他們中間，是熱的。第一個開口的人，先伸了手。`],
 ['10','實驗中止後之行為觀察','特工聯絡對講機　現行規則形成後<br>檔案：REC-██-10　錄製：20██/09/14 14:30　時長：02:12<br>來源：特工聯絡對講機　訊號：良好',`n|00:00　走動聲，腳步輕，節奏不均。
 a|最近的房間好像比較簡單了？
 s|是。
@@ -1239,7 +1240,7 @@ n|05:48　牆壁深處傳來沉重的摩擦聲，像整座建築正在重新咬�
 n|06:51　無線電重新接通，只有雜訊，約3秒。錄音結束。
 o|特工在 00:19 向總部發出的求援沒有收到任何回應；總部端錄音中亦未出現回覆。推測在此區域無線電只能單向發送。
 o|研究部：不得解讀為特工能完全控制 Shade。\no|補充：傳送的對象與去向見根基事件。事件後樓層逐步恢復可通行狀態，但恢復過程沒有完整紀錄。
-i|聲音太多，切成三塊才放得下。`],
+i|三個人同時說話。我分開排了，有一句沒排進去。`],
 ['P-06','選擇','特工聯絡對講機　TG-P-12 事件後<br>檔案：PRV-██-06　錄製：20██/09/16　時間不明　時長：03:14<br>來源：特工聯絡對講機　訊號：良好',`n|00:00　背景有輕微的衣料摩擦聲，特工似乎在調整坐姿，伴隨短促的吸氣聲。
 s|你又受傷了。
 a|這次真的有點倒楣。
@@ -1311,7 +1312,7 @@ a|哈哈，我這個人比較難照顧啦。
 s|我會記得。
 a|記是可以記啦，但別告訴別人喔。
 n|01:36　特工打了一個長長的哈欠，錄音結束。
-i|燈亮著。沒有人要它暗。`],
+i|燈一直開著。我沒有調暗，但他說過這樣睡不著。`],
 ['P-07','謝謝','特工聯絡對講機　日常交流<br>檔案：PRV-██-07　錄製：20██/10/02 15:05　時長：01:21<br>來源：特工聯絡對講機　訊號：良好',`n|00:00　開機提示音。背景安靜。
 s|你上次說，收到幫助要說謝謝。
 a|對啊。
@@ -1341,7 +1342,7 @@ s|我不知道該如何選擇性遺忘。
 a|……我真是自找的。
 n|01:12　門鎖鬆開的聲音。房內傳來細小的水聲，接著是杯子放上桌面的輕響。
 n|01:27　門外傳來一聲極輕的機械扣合聲，錄音結束。
-i|門前，停了一步。人類都會停一步。`],
+i|他之前在門前停了一步，才敲。我記下來了。`],
 ['P-08','貓','M.E.G.CN 臨時休整區　返程後・未提交<br>檔案：PRV-██-08　錄製：20██/10/18　時間不明　時長：01:46<br>來源：特工聯絡對講機（疑似誤觸錄音鍵）　訊號：良好',`n|00:00　一聲短促提示音後，錄音突然開始；收音孔似乎被衣料遮住，聲音先悶了一瞬。背景有遠處的人聲、紙箱拖過地面的摩擦聲，以及一陣窸窣的塑膠袋聲。
 n|00:08　腳步聲停下。衣料輕輕摩擦，像是有人蹲了下來。
 a|……你怎麼跑到這裡來了？
@@ -1358,8 +1359,8 @@ a|來了、來了！我只是停一下。
 n|01:31　衣料摩擦聲，腳步重新站起。特工往外走了幾步，又停下。
 a|……好吧，再看一眼。
 n|01:40　很輕的一聲笑。紙箱邊緣傳來幾下細碎的爪子聲，錄音在背景人聲中結束。
-i|這一段放不進任何格子。原樣。`],
-['I-04/01','關於突然出現','異常音訊紀錄　I-04 行為矯正錄音<br>檔案：I-04-01　時長：02:17<br>來源：不明（無建立日期、錄製設備與持有者資訊）　訊號：良好　備註：僅能於實驗場內播放，無法複製；部分檔案播放結束後會自行重新排列',`n|00:00　錄音開始。底噪平穩，像空曠房間裡的空調聲。
+i|這一段，我不知道該放在哪一類。沒有動它。`],
+['I-06/01','關於突然出現','異常音訊紀錄　I-06 行為矯正錄音<br>檔案：I-06-01　時長：02:17<br>來源：不明（無建立日期、錄製設備與持有者資訊）　訊號：良好　備註：僅能於實驗場內播放，無法複製；部分檔案播放結束後會自行重新排列',`n|00:00　錄音開始。底噪平穩，像空曠房間裡的空調聲。
 a|首先，不要突然出現在別人背後。
 u|為什麼？
 a|因為會嚇到人啊。
@@ -1377,7 +1378,7 @@ a|很好！就是這樣！
 u|你現在很高興。
 a|因為你學得很快嘛。
 n|02:17　錄音結束。`],
-['I-04/02','關於眼睛','異常音訊紀錄　I-04 行為矯正錄音<br>檔案：I-04-02　時長：03:41<br>來源：不明（無建立日期、錄製設備與持有者資訊）　訊號：良好',`n|00:00　錄音開始。電流聲極輕，隨即穩定。
+['I-06/02','關於眼睛','異常音訊紀錄　I-06 行為矯正錄音<br>檔案：I-06-02　時長：03:41<br>來源：不明（無建立日期、錄製設備與持有者資訊）　訊號：良好',`n|00:00　錄音開始。電流聲極輕，隨即穩定。
 a|第二件事，不要一直盯著人看。
 u|我在觀察。
 a|我知道，但你已經盯著那個人二十三分鐘了。
@@ -1397,7 +1398,7 @@ a|不要測量。你只要看見對方開始發抖、尖叫、逃跑，就代表
 u|如果他只是高興？
 a|……那就更不要用你的方式確認了。
 n|03:41　錄音結束。`],
-['I-04/03','關於聲音','異常音訊紀錄　I-04 行為矯正錄音<br>檔案：I-04-03　時長：04:06<br>來源：不明（無建立日期、錄製設備與持有者資訊）　訊號：良好',`n|00:00　錄音開始。底噪比前一段略低。
+['I-06/03','關於聲音','異常音訊紀錄　I-06 行為矯正錄音<br>檔案：I-06-03　時長：04:06<br>來源：不明（無建立日期、錄製設備與持有者資訊）　訊號：良好',`n|00:00　錄音開始。底噪比前一段略低。
 a|還有，不要同時從四面八方說話。
 u|這樣比較有效率。
 a|但人類會以為自己腦袋裡有四個人在講話！
@@ -1419,7 +1420,7 @@ a|嘴巴。
 u|我沒有嘴巴。
 a|……那就隨便找個正常的地方發出聲音吧。
 n|04:06　錄音結束。`],
-['I-04/04','關於實驗','異常音訊紀錄　I-04 行為矯正錄音<br>檔案：I-04-04　時長：05:52<br>來源：不明（無建立日期、錄製設備與持有者資訊）　訊號：良好',`n|00:00　錄音開始。遠處有規律的機械運轉聲，約每秒一次。
+['I-06/04','關於實驗','異常音訊紀錄　I-06 行為矯正錄音<br>檔案：I-06-04　時長：05:52<br>來源：不明（無建立日期、錄製設備與持有者資訊）　訊號：良好',`n|00:00　錄音開始。遠處有規律的機械運轉聲，約每秒一次。
 u|我想知道人類在恐懼時會發生什麼變化。
 a|你可以觀察，但不要故意把人逼到崩潰。
 u|如果不施加刺激，結果便沒有意義。
@@ -1436,7 +1437,7 @@ n|04:46　約二十秒沒有人說話，機械運轉聲的間隔慢慢拉長。
 u|我想知道他們為什麼會繼續。
 a|那你就得讓他們有機會繼續。
 n|05:52　錄音結束。`],
-['I-04/05','關於善意','異常音訊紀錄　I-04 行為矯正錄音<br>檔案：I-04-05　時長：03:28<br>來源：不明（無建立日期、錄製設備與持有者資訊）　訊號：良好',`n|00:00　錄音開始。底噪平穩。
+['I-06/05','關於善意','異常音訊紀錄　I-06 行為矯正錄音<br>檔案：I-06-05　時長：03:28<br>來源：不明（無建立日期、錄製設備與持有者資訊）　訊號：良好',`n|00:00　錄音開始。底噪平穩。
 u|我按照你的方式，讓三名人類離開了房間。
 a|喔？很棒啊！他們有說什麼嗎？
 u|其中一人哭了。
@@ -1459,7 +1460,7 @@ n|02:59　約十秒內，背景的嗡鳴聲緩緩降低，又慢慢回升。
 u|我會再試一次。
 a|好啊。這次先不要碰他的影子。
 n|03:28　錄音結束。`],
-['I-04/06','關於人類的極限','異常音訊紀錄　I-04 行為矯正錄音<br>檔案：I-04-06　時長：06:13<br>來源：不明（無建立日期、錄製設備與持有者資訊）　訊號：良好',`n|00:00　錄音開始。底噪略有起伏。
+['I-06/06','關於人類的極限','異常音訊紀錄　I-06 行為矯正錄音<br>檔案：I-06-06　時長：06:13<br>來源：不明（無建立日期、錄製設備與持有者資訊）　訊號：良好',`n|00:00　錄音開始。底噪略有起伏。
 u|我觀察到，人類在精神狀態接近崩潰時，仍然可能繼續行動。
 a|那不代表他們還能承受更多。
 u|他們沒有停止。
@@ -1480,7 +1481,7 @@ a|因為我還有事情要做啊。
 u|你總是這樣說。
 a|所以你也要學會，不是每個人都會在自己說不行之前就停下來。
 n|06:13　錄音結束。`],
-['I-04/07','測驗結果','異常音訊紀錄　I-04 行為矯正錄音<br>檔案：I-04-07　時長：02:54<br>來源：不明（無建立日期、錄製設備與持有者資訊）　訊號：良好',`n|00:00　錄音開始。底噪平穩，比前幾段更安靜。
+['I-06/07','測驗結果','異常音訊紀錄　I-06 行為矯正錄音<br>檔案：I-06-07　時長：02:54<br>來源：不明（無建立日期、錄製設備與持有者資訊）　訊號：良好',`n|00:00　錄音開始。底噪平穩，比前幾段更安靜。
 u|我已經記住了。
 a|記住什麼？
 u|不從牆壁裡突然出現。不從多個方向同時說話。不讓影子自行移動。不將人類逼至精神崩潰。
@@ -1523,7 +1524,7 @@ a|因為你也在說話啊。
 n|00:47　錄音在此處中斷，後續約四分鐘無法還原。`],
 ];
 let tok=0;const sl=ms=>new Promise(r=>setTimeout(r,ms));
-function recHtml(){const privateIds=['P-01','P-02','P-03','P-04','P-05','P-06','P-07','P-08','P-09','P-10'];const stp=r=>{if(privateIds.includes(r[0]))return '';const t=['<span class="stamp s2">正式存檔</span>','<span class="stamp s3">已核閱</span>'];if(/降噪/.test(r[2]))t.push('<span class="stamp s2">已降噪</span>');if(/部分損毀|殘缺/.test(r[2]))t.push('<span class="stamp">訊號殘缺</span>');return '<div class="stamps">'+t.join('')+'</div>'};return '<h2>通訊與私人留存紀錄</h2><p class="lgd"><span class="a">■ 特工</span>　<span class="s">■ Shade</span>　<span style="color:var(--mut)">■ 旁白／其他</span></p><p class="priv-note">標示「私人留存」者，為特工個人保存、未納入 M.E.G.CN 正式檔案的錄音、語音備忘或私人紀錄。兩類編號各自獨立：官方檔案為 REC 系列（01–10，檔案代號 REC-██-nn），私人留存為 P 系列（P-01–P-10，檔案代號 PRV-██-nn）。</p>'+(()=>{const one=(r,i)=>`<details ${r[0]=='01'?'open':''}><summary>紀錄 ${r[0]}：${r[1]} ${privateIds.includes(r[0])?'<span class="priv-flag">私人留存</span>':''}</summary><div class="lgd" style="color:var(--mut)">${r[2]}</div>${stp(r)}<button data-p="${i}">▶ 播放</button> <button data-f="${i}">展示紀錄</button> <button data-x>■ 停止</button><div class="lg" id="lg${i}"></div></details>`;return [['官方檔案（REC 系列・M.E.G.CN 正式收錄）',['01','02','03','04','05','06','07','08','09','10']],['私人留存（P 系列・特工個人保存，未納入正式檔案）',['P-01','P-02','P-03','P-04','P-05','P-06','P-07','P-08','P-09','P-10']],['時間不明（I-04 行為矯正錄音）',['I-04/01','I-04/02','I-04/03','I-04/04','I-04/05','I-04/06','I-04/07']]].map(([g,ids],gi)=>`<details class="rg" ${gi==0?'open':''}><summary><b>${g}</b>（${ids.length}）</summary>${ids.map(id=>{const i=REC.findIndex(r=>r[0]==id);return one(REC[i],i)}).join('')}</details>`).join('')})()}
+function recHtml(){const privateIds=['P-01','P-02','P-03','P-04','P-05','P-06','P-07','P-08','P-09','P-10'];const stp=r=>{if(privateIds.includes(r[0]))return '';const t=['<span class="stamp s2">正式存檔</span>','<span class="stamp s3">已核閱</span>'];if(/降噪/.test(r[2]))t.push('<span class="stamp s2">已降噪</span>');if(/部分損毀|殘缺/.test(r[2]))t.push('<span class="stamp">訊號殘缺</span>');return '<div class="stamps">'+t.join('')+'</div>'};return '<h2>通訊與私人留存紀錄</h2><p class="lgd"><span class="a">■ 特工</span>　<span class="s">■ Shade</span>　<span style="color:var(--mut)">■ 旁白／其他</span></p><p class="priv-note">標示「私人留存」者，為特工個人保存、未納入 M.E.G.CN 正式檔案的錄音、語音備忘或私人紀錄。兩類編號各自獨立：官方檔案為 REC 系列（01–10，檔案代號 REC-██-nn），私人留存為 P 系列（P-01–P-10，檔案代號 PRV-██-nn）。</p>'+(()=>{const one=(r,i)=>`<details ${r[0]=='01'?'open':''}><summary>紀錄 ${r[0]}：${r[1]} ${privateIds.includes(r[0])?'<span class="priv-flag">私人留存</span>':''}</summary><div class="lgd" style="color:var(--mut)">${r[2]}</div>${stp(r)}<button data-p="${i}">▶ 播放</button> <button data-f="${i}">展示紀錄</button> <button data-x>■ 停止</button><div class="lg" id="lg${i}"></div></details>`;return [['官方檔案（REC 系列・M.E.G.CN 正式收錄）',['01','02','03','04','05','06','07','08','09','10']],['私人留存（P 系列・特工個人保存，未納入正式檔案）',['P-01','P-02','P-03','P-04','P-05','P-06','P-07','P-08','P-09','P-10']],['時間不明（I-06 行為矯正錄音）',['I-06/01','I-06/02','I-06/03','I-06/04','I-06/05','I-06/06','I-06/07']]].map(([g,ids],gi)=>`<details class="rg" ${gi==0?'open':''}><summary><b>${g}</b>（${ids.length}）</summary>${ids.map(id=>{const i=REC.findIndex(r=>r[0]==id);return one(REC[i],i)}).join('')}</details>`).join('')})()}
 function line(el,s){const[k,...t]=s.split('|'),x=t.join('|'),d=document.createElement('div');d.className='ln '+(k=='u'?'s':k=='i'?'i it':k);if(k=='a'||k=='s'||k=='u')d.innerHTML='<b>'+(k=='a'?'特工':k=='u'?'白日之影':'Shade')+'：</b><span></span>';else d.innerHTML='<span></span>';el.append(d);return d.lastChild}
 async function play(i,full){const m=++tok,el=$('#lg'+i);el.innerHTML='';let fol=true;el.onscroll=()=>{fol=el.scrollHeight-el.scrollTop-el.clientHeight<48};el.scrollIntoView({block:'nearest'});const fl=()=>{if(fol)el.scrollTop=el.scrollHeight};for(const s of REC[i][3].split('\n')){if(m!=tok)return;if(i==0&&!named&&(full||s.includes('那就 Shade 吧')))nameIt();const sp=line(el,s),x=s[0]=='n'?'（'+s.slice(2)+'）':s[0]=='i'?'↳ '+s.slice(2):s.slice(2);if(full){sp.textContent=x;continue}fl();await sl(s[0]=='n'?700:450);for(let c=1;c<=x.length;c++){if(m!=tok)return;sp.textContent=x.slice(0,c);fl();await sl(26)}}if(full)el.scrollTop=0;else fl()}
 function recInit(){$('#main').onclick=e=>{const t=e.target;if(t.dataset.p!=null)play(+t.dataset.p);if(t.dataset.f!=null)play(+t.dataset.f,1);if(t.dataset.x!=null)tok++}}
@@ -1604,5 +1605,16 @@ const _go2=go;go=function(id){if(cur==='shade'&&id!=='shade'&&!seenSh){seenSh=tr
 const _go3=go;go=function(id){_go3(id);if(id==='shade')requestAnimationFrame(()=>q('#main').querySelectorAll('li').forEach(li=>{const b=li.querySelector('b');if(b&&SHFX[b.textContent.trim()]){li.tabIndex=0;li.setAttribute('role','button');li.setAttribute('aria-label','互動能力：'+b.textContent.trim())}}))};
 document.addEventListener('keydown',e=>{if(cur!=='shade'||(e.key!=='Enter'&&e.key!==' '))return;const li=e.target.closest('#main li[role="button"]');if(!li)return;e.preventDefault();const b=li.querySelector('b'),f=b&&SHFX[b.textContent.trim()];if(f)f(li)});
 try{console.log('%c整理中……\n你翻到了牆的後面。那裡沒有東西。','font-family:serif;font-size:14px;color:#a899e0')}catch(e){}
+
+/* 腳註：點上標彈出文字卡 */
+(()=>{let card=null,src=null;const hide=()=>{if(card){card.remove();card=null;src=null}};
+document.addEventListener('click',e=>{const f=e.target.closest('sup.fn');
+if(!f||!$('#main').contains(f)){if(card&&!e.target.closest('#fncard'))hide();return}
+if(src===f){hide();return}hide();
+const n=parseInt(f.textContent.replace(/\D/g,''),10);const bs=[...$('#main').querySelectorAll('.fnb')];const box=bs.find(b=>f.compareDocumentPosition(b)&Node.DOCUMENT_POSITION_FOLLOWING)||bs[bs.length-1];if(!box)return;const li=box.querySelectorAll('ol>li')[n-1];if(!li)return;
+card=document.createElement('div');card.id='fncard';card.innerHTML='<b>腳註 '+n+'</b>'+li.innerHTML;src=f;document.body.append(card);
+const r=f.getBoundingClientRect(),w=card.offsetWidth,x=Math.max(8,Math.min(innerWidth-w-8,r.left+scrollX-w/2+r.width/2));
+card.style.left=x+'px';card.style.top=(r.bottom+scrollY+8)+'px'});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hide()});})();
 })();
 </script></body></html>
