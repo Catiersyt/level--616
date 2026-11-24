@@ -123,7 +123,7 @@ ol.tl{list-style:none;padding:0;margin:.4em 0}ol.tl>li{padding:.25em 0 .25em .2e
 ol.route{padding-left:1.3em;margin:.4em 0}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 .fnb{font-size:.88rem;color:var(--mut);border-top:1px solid var(--line);margin-top:1.6em;padding-top:.6em}.fnb ol{margin:.3em 0;padding-left:1.4em}.fn{cursor:pointer;font-size:.72em;color:var(--acc);vertical-align:super}.fn:hover{text-decoration:underline}#fncard{position:absolute;z-index:60;max-width:min(320px,calc(100vw - 16px));box-sizing:border-box;padding:10px 14px;background:var(--card);color:var(--ink);border:1px solid var(--acc);border-radius:6px;font-size:.88rem;line-height:1.7;box-shadow:0 4px 14px rgba(0,0,0,.18)}#fncard b{display:block;color:var(--acc);font-size:.78rem;letter-spacing:.1em;margin-bottom:2px}.fnb li.fnhl{background:var(--card);box-shadow:inset 3px 0 var(--acc);transition:background .4s}.fnb .fnback{margin-left:.4em;cursor:pointer;color:var(--acc);text-decoration:none}</style></head><body>
-<div id="intro"><div class="t">LEVEL -616<small>請稍候。</small></div><button id="door" type="button" aria-label="開啟入口" disabled></button><button id="introSkip" type="button">略過入口等待</button></div>
+<div id="intro"><div class="t">LEVEL -616<small>請稍候。</small></div><button id="door" type="button" aria-label="開啟入口" disabled></button><button id="introSkip" type="button">略過等待</button></div>
 <div id="app">
 <header><h1>Level <b id="redh">-616</b> 實驗場</h1><div><span id="badge"></span> <button id="authbtn">權限認證</button> <button id="thm">明暗</button></div></header>
 <div id="pg"></div><div id="shell"><aside id="side"><button id="mt">☰ 目錄</button><input id="sq" type="search" inputmode="search" autocomplete="off" placeholder="搜尋檔案內容…" aria-label="搜尋檔案內容"><div id="sr"></div><nav id="nav"></nav></aside><main id="main" tabindex="-1" aria-live="polite"></main></div></div>
@@ -220,11 +220,11 @@ function linkIds(){if(!P[cur]||['talk','sim','rec'].includes(cur))return;const r
 const dlg=(a,b)=>`<p class="q"><b>${a}</b>：${b}</p>`;
 const P={
 home:{n:'樓層概述',l:1,h:()=>`<h2>實驗場（The Testing Ground）</h2>
-<div class="meta"><div><i>現行難度</i>Class 1（現行探索評估）</div><div><i>檔案編號</i>M.E.G.CN-L-616</div><div><i>最後更新</i>20██/11/24</div><div><i>檔案管理單位</i>M.E.G.CN 放大鏡|信息處理部門</div><div><i>環境</i>觀測到結構變化；多數已記錄區域暫時穩定</div><div><i>實體</i>1（目前列檔：Shade）</div><div><i>主要異常</i>非線性空間、空間功能錯置、空間操縱、實驗系統控制</div><div><i>基地</i>無法維持常設基地</div></div>
+<div class="meta"><div><i>現行難度</i>Class 1（現行探索評估）</div><div><i>檔案編號</i>M.E.G.CN-L-616</div><div><i>最後更新</i>20██/11/24</div><div><i>檔案管理單位</i>放大鏡|信息處理部門</div><div><i>環境</i>結構變化不穩；多數已記錄區域暫時穩定</div><div><i>實體</i>1（目前列檔：Shade）</div><div><i>主要異常</i>非線性空間、空間/功能錯置</div><div><i>基地</i>無法維持常設基地</div></div>
 
 
 
-<p>Level -616，暫稱「實驗場」，是一處由大量房間、走廊與彼此重疊的空間構成的非線性樓層。各區域的規模、用途與物理條件差異極大。樓層沒有可確認的中心與固定平面圖，也沒有穩定的遠近關係<sup class="fn">[1]</sup>（見${L('space','空間結構')}）。</p>
+<p>Level -616，暫稱「實驗場」，是一處由大量房間、走廊構成的非線性樓層。各區域的規模、用途與物理條件差異極大。樓層沒有可確認的中心與固定平面圖，也沒有穩定的遠近關係<sup class="fn">[1]</sup>（見${L('space','空間結構')}）。</p>
 <h3>樓層簡述</h3>
 <p>進入者通常從初始房間出發，穿過一連串規則各異的空間，包括限時、選擇、合作、觀察、記憶與感知等類型。部分空間的外觀與實際用途並不一致（見${L('rules','房間規則')}）。出口多以原本不存在的門出現，且目的地無法預測。由於空間不穩定，實驗場無法維持常設基地，通訊與物資同樣不可靠（見${L('base','基地・出入口')}）。</p>
 <p>這些房間的配置、規則與出口，據推測大多由一個隱密實體（白日之影）設置與調整。它與樓層的根基共生，可能是整座實驗場運作的核心（見${L('shade','實體觀測檔案')}）。早期的實驗場以致命實驗聞名，現行的危險程度已明顯下降，變化過程詳見${L('hist','樓層歷史')}。</p>
