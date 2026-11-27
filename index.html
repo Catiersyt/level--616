@@ -122,7 +122,27 @@ p.it.end{margin:36px 0 8px;text-align:right;opacity:.75;background:none}
 ol.tl{list-style:none;padding:0;margin:.4em 0}ol.tl>li{padding:.25em 0 .25em .2em;border-bottom:1px dashed var(--line);font-size:.93rem}
 ol.route{padding-left:1.3em;margin:.4em 0}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
-.fnb{font-size:.88rem;color:var(--mut);border-top:1px solid var(--line);margin-top:1.6em;padding-top:.6em}.fnb ol{margin:.3em 0;padding-left:1.4em}.fn{cursor:pointer;font-size:.72em;color:var(--acc);vertical-align:super}.fn:hover{text-decoration:underline}#fncard{position:absolute;z-index:60;max-width:min(320px,calc(100vw - 16px));box-sizing:border-box;padding:10px 14px;background:var(--card);color:var(--ink);border:1px solid var(--acc);border-radius:6px;font-size:.88rem;line-height:1.7;box-shadow:0 4px 14px rgba(0,0,0,.18)}#fncard b{display:block;color:var(--acc);font-size:.78rem;letter-spacing:.1em;margin-bottom:2px}.fnb li.fnhl{background:var(--card);box-shadow:inset 3px 0 var(--acc);transition:background .4s}.fnb .fnback{margin-left:.4em;cursor:pointer;color:var(--acc);text-decoration:none}</style></head><body>
+.fnb{font-size:.88rem;color:var(--mut);border-top:1px solid var(--line);margin-top:1.6em;padding-top:.6em}.fnb ol{margin:.3em 0;padding-left:1.4em}.fn{cursor:pointer;font-size:.72em;color:var(--acc);vertical-align:super}.fn:hover{text-decoration:underline}#fncard{position:absolute;z-index:60;max-width:min(320px,calc(100vw - 16px));box-sizing:border-box;padding:10px 14px;background:var(--card);color:var(--ink);border:1px solid var(--acc);border-radius:6px;font-size:.88rem;line-height:1.7;box-shadow:0 4px 14px rgba(0,0,0,.18)}#fncard b{display:block;color:var(--acc);font-size:.78rem;letter-spacing:.1em;margin-bottom:2px}.fnb li.fnhl{background:var(--card);box-shadow:inset 3px 0 var(--acc);transition:background .4s}.fnb .fnback{margin-left:.4em;cursor:pointer;color:var(--acc);text-decoration:none}
+/* ===== Shade 的私人收藏（彩蛋）===== */
+#nav button.eg{border-style:dashed;border-color:var(--acc);color:var(--acc)}
+.coll{border:1px dashed var(--acc);border-radius:6px;padding:6px 18px 14px;background:color-mix(in srgb,var(--acc) 5%,var(--card));font-family:'LXGW WenKai TC','Noto Serif TC',serif}
+.coll h2{letter-spacing:.12em}.coll .hush{color:var(--mut);margin:.2em 0 .9em;line-height:1.9}
+.coll details{background:transparent;border-color:color-mix(in srgb,var(--acc) 35%,var(--line))}
+.coll .tag{display:inline-block;margin-left:.45rem;padding:.1rem .42rem;border:1px dashed var(--acc);border-radius:999px;color:var(--acc);font-size:.72rem;font-weight:700;vertical-align:middle}
+.coll .lg{border-left-style:dashed}
+.shc{position:fixed;left:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:62;width:min(340px,calc(100vw - 24px));background:var(--card);color:var(--ink);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:6px;box-shadow:0 6px 22px rgba(0,0,0,.22);display:flex;flex-direction:column;max-height:calc(100vh - 24px);font-size:.94rem;animation:shcin .6s}
+.shc[hidden],.shchip[hidden]{display:none}
+@keyframes shcin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.shc header{cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;display:flex;align-items:center;gap:8px;padding:7px 10px;border-bottom:1px solid var(--line);color:var(--acc);font-weight:700;letter-spacing:.1em;font-size:.85rem}
+.shc header span{flex:1;color:var(--mut);font-weight:400;letter-spacing:0;font-size:.78rem}
+.shc header button{padding:0 8px;line-height:1.5}
+.shc .sl{max-height:min(42vh,320px);min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:8px 12px;overscroll-behavior:contain}
+.shc .sl div{margin:.4em 0;line-height:1.75;word-break:break-word}
+.shc .sl .s{color:var(--acc)}.shc .sl .v{color:var(--mut);text-align:right}.shc .sl .t{color:var(--mut);letter-spacing:.2em}
+.shc form{display:flex;gap:6px;padding:8px 10px;border-top:1px solid var(--line)}
+.shc input{flex:1;min-width:0;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:5px 8px;font:inherit}
+.shchip{position:fixed;left:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:62;border-radius:999px;border:1px solid var(--acc);color:var(--acc);background:var(--card);padding:4px 14px;font-size:.82rem;letter-spacing:.1em;cursor:pointer;animation:shcin .6s}
+</style></head><body>
 <div id="intro"><div class="t">LEVEL -616<small>請稍候。</small></div><button id="door" type="button" aria-label="開啟入口" disabled></button><button id="introSkip" type="button">略過等待</button></div>
 <div id="app">
 <header><h1>Level <b id="redh">-616</b> 實驗場</h1><div><span id="badge"></span> <button id="authbtn">權限認證</button> <button id="thm">明暗</button></div></header>
@@ -133,6 +153,13 @@ ol.route{padding-left:1.3em;margin:.4em 0}
 <div id="toast"></div>
 <script>
 const $=s=>document.querySelector(s);
+/* 彩蛋狀態：獨立儲存，不影響原本的權限／主題存檔 */
+const EGG_KEY='lv616_egg_v1';
+const EGG_ORD=['01','02','03','04','05','06','07','08','09','P-01','P-02','P-03','P-04','P-05','P-06','P-07','P-08','P-09','P-10'];/* 「普通音檔」：官方 01–09 與私人 P-01–P-10；I-06 異常音訊不計 */
+const EGG_SECRET='再看一眼';
+let EGG=(()=>{const d={heard:[],trig:false,stage:'',gotKey:false,coll:false,log:[]};try{const v=JSON.parse(localStorage.getItem(EGG_KEY)||'{}');if(v&&typeof v==='object'){for(const k in d)if(k in v&&typeof v[k]===typeof d[k])d[k]=v[k]}}catch(_){}return d})();
+const eggSave=()=>{try{localStorage.setItem(EGG_KEY,JSON.stringify(EGG))}catch(_){}};
+const eggNorm=t=>String(t).replace(/[\s.．。…·、，,!！?？「」『』"'“”~～_\-—]/g,'');
 const STORE_KEY='level616-ui-state-v2';
 const readState=()=>{try{const v=JSON.parse(localStorage.getItem(STORE_KEY)||'{}');return v&&typeof v==='object'?v:{}}catch(_){return {}}};
 const savedState=readState();
@@ -214,7 +241,7 @@ const REL={home:['space','rules','base','hist','shade','exp'],space:['home','rul
 const ROUTE=[['home','生存'],['rules','生存'],['space','生存'],['base','生存'],['exp','案例'],['anom','案例'],['shade','背景'],['hist','背景'],['f1','背景'],['f2','背景'],['appx','背景'],['fc','機密'],['inc','機密'],['rec','機密']];
 function nxt(k){const i=ROUTE.findIndex(r=>r[0]==k);if(i<0)return '';const a=ROUTE[i-1],b=ROUTE[i+1],ch=(r,t)=>{const c=P[r[0]].l>clr;return `<a href="#" class="chip${c?' lc':''}" data-go="${r[0]}">${t} ${c?'🔒 ':''}${P[r[0]].n}</a>`};return `<div class="nxt"><span>主線 ${i+1}/${ROUTE.length}・${ROUTE[i][1]}</span>${a?ch(a,'‹'):''}${b?ch(b,'›'):''}</div>`}
 function rel(k){const a=(REL[k]||[]).filter(x=>P[x]&&!(P[x].hid&&!found&&clr<3));return a.length?'<div class="rel"><span>相關頁面</span>'+a.map(x=>{const c=P[x].l>clr;return `<a href="#" class="chip${c?' lc':''}" data-go="${x}">${c?'🔒 ':''}${P[x].n}</a>`}).join('')+'</div>':''}
-const KW=[['白日之影','shade'],['Level 995','base'],['TG-P-12','rec','09'],['TG-P-07','rec','06'],['實驗中止','rules'],['中止機制','rules'],['中止協議','rules'],['房間規則','rules'],['空間結構','space'],['樓層歷史','hist'],['探索紀錄','exp'],['模擬體驗','sim'],['契約與人員紀錄','fc'],['訪談紀錄','f2'],['根基事件','inc'],['樓層根基','inc'],['通訊紀錄','rec'],['特殊物品','anom'],['特殊狀態','anom'],['早期危險評估','f1'],['契約','fc']];
+const KW=[['白日之影','shade'],['Level 995','base'],['TG-P-12','rec','08'],['TG-P-07','rec','06'],['實驗中止','rules'],['中止機制','rules'],['中止協議','rules'],['房間規則','rules'],['空間結構','space'],['樓層歷史','hist'],['探索紀錄','exp'],['模擬體驗','sim'],['契約與人員紀錄','fc'],['訪談紀錄','f2'],['根基事件','inc'],['樓層根基','inc'],['通訊紀錄','rec'],['特殊物品','anom'],['特殊狀態','anom'],['早期危險評估','f1'],['契約','fc']];
 function linkify(){if(!P[cur]||['talk','sim','rec','shade'].includes(cur))return;const root=$('#main'),seen=new Set();root.querySelectorAll('a[data-go]:not(.chip)').forEach(a=>seen.add(a.dataset.go+(a.dataset.rec||'')));const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),ns=[];while(w.nextNode())ns.push(w.currentNode);for(let i=0;i<ns.length;i++){const n=ns[i],p=n.parentElement;if(!p||p.closest('a,summary,h1,h2,h3,h4,button,.q,[data-k],.stamp,.chip,.tools,.rel,.nm,.keep,.red'))continue;let b=null;for(const [t,k,r] of KW){if(k==cur)continue;const key=k+(r||'');if(seen.has(key))continue;const ix=n.nodeValue.indexOf(t);if(ix>=0&&(!b||ix<b.ix))b={ix,t,k,r,key}}if(!b)continue;seen.add(b.key);const mid=n.splitText(b.ix),after=mid.splitText(b.t.length),a=document.createElement('a');a.href='#';a.className='lk'+(P[b.k].l>clr?' lc':'');a.dataset.go=b.k;if(b.r)a.dataset.rec=b.r;if(P[b.k].l>clr)a.title='需要更高權限';a.textContent=b.t;mid.replaceWith(a);ns.splice(i+1,0,after)}}
 function linkIds(){if(!P[cur]||['talk','sim','rec'].includes(cur))return;const root=$('#main');if(!root)return;const SK='a,summary,h1,h2,h3,h4,button,.q,.meta,.chip,.tools,.rel,.nm,.keep,.red,.it,[data-k],.stamp';const RE=/(I-06\/\d\d|REC-(?:██-)?\d\d|PRV-(?:██-)?\d\d|TG-AUD-003|SEC-A0[13]|INT-L-616-04|附錄 [A-E]|EX-\d\d|I-0\d(?!\d)|S-0\d(?!\d)|FD-0\d|U-00\d|通訊紀錄 \d\d)/;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),ns=[];while(w.nextNode())ns.push(w.currentNode);ns.forEach(n=>{if(!n.isConnected)return;const p=n.parentElement;if(!p||p.closest(SK))return;let node=n,m;while(node&&(m=RE.exec(node.nodeValue))){const t=m[1],pre=t.slice(0,2);let k,r,j;if(/^REC-/.test(t)){k='rec';r=t.slice(-2)}else if(/^PRV-/.test(t)){k='rec';r='P-'+t.slice(-2)}else if(t==='TG-AUD-003'||t==='SEC-A03'){k='rec';r='P-01'}else if(t==='SEC-A01'){k='rec';r='01'}else if(/^I-06\//.test(t)){k='rec';r=t}else if(t==='附錄 D'||t==='INT-L-616-04'){k='fc';j='fc-appd'}else if(t==='附錄 E'){k='fc';j='fc-appe'}else if(t==='附錄 A'){k='appx';j='apx-a'}else if(t==='附錄 B'){k='appx';j='apx-b'}else if(t.startsWith('EX'))k='exp',j=t.toLowerCase();else if(t.startsWith('I-')||t.startsWith('S-'))k='anom',j=t.toLowerCase();else if(t.startsWith('FD'))k='space',j=t.toLowerCase();else if(t.startsWith('U-'))k='unf',j=t.toLowerCase();else{k='rec';r=t.slice(-2)}const mid=node.splitText(m.index),after=mid.splitText(t.length),a=document.createElement('a');a.href='#';a.className='lk'+(P[k].l>clr?' lc':'');a.dataset.go=k;if(r)a.dataset.rec=r;if(j)a.dataset.j=j;if(P[k].l>clr)a.title='需要更高權限';a.textContent=t;mid.replaceWith(a);node=after}})}
 const dlg=(a,b)=>`<p class="q"><b>${a}</b>：${b}</p>`;
@@ -375,7 +402,7 @@ shade:{n:'實體觀測檔案',l:1,h:()=>`<h2>白日之影</h2>
 <p><b>回應的共同特徵</b>：簡短、直接，沒有寒暄，似乎不熟悉人類的日常社交與隱含意義。常在人出現決策、沉默、放棄或求助的時刻發聲，回應之後多半伴隨出口開啟或規則停止。</p></details>
 
 <details id="sh-files"><summary><b>相關檔案</b></summary>
-<div class="apx"><div><b>檔案 1</b>　非公開音訊——人類行為指導紀錄<br>${L('rec','I-06 行為矯正錄音','I-06/01')}・${L('rec','通訊紀錄 02','02')}・${L('rec','通訊紀錄 P-02','P-02')}</div><div><b>檔案 2</b>　Level -616 實驗環境與異常現象紀錄<br>${L('space','空間結構')}・${L('rules','房間規則')}・${L('anom','特殊物品與特殊狀態')}・${L('exp','探索紀錄')}</div><div><b>檔案 3</b>　特殊事件紀錄——Level -616 根基崩解與實體介入<br>${L('inc','根基事件')}・${L('rec','通訊紀錄 09','09')}・${L('sim','模擬體驗')}・${L('hist','樓層歷史')}</div></div></details>
+<div class="apx"><div><b>檔案 1</b>　非公開音訊——人類行為指導紀錄<br>${L('rec','I-06 行為矯正錄音','I-06/01')}・${L('rec','通訊紀錄 02','02')}・${L('rec','通訊紀錄 P-02','P-02')}</div><div><b>檔案 2</b>　Level -616 實驗環境與異常現象紀錄<br>${L('space','空間結構')}・${L('rules','房間規則')}・${L('anom','特殊物品與特殊狀態')}・${L('exp','探索紀錄')}</div><div><b>檔案 3</b>　特殊事件紀錄——Level -616 根基崩解與實體介入<br>${L('inc','根基事件')}・${L('rec','通訊紀錄 08','08')}・${L('sim','模擬體驗')}・${L('hist','樓層歷史')}</div></div></details>
 <div class="card">歸檔備註：白日之影是組織的稱呼，並非它的名字。有人替它取過另一個。</div>`},
 base:{n:'基地・出入口',l:1,h:()=>`<h2>基地與出入口</h2><p>實驗場無法建立常設基地。房間與走廊的連接關係會自行改變，已確認的路線無法長期維持；物資存放處可能在無預警時被隔離、移位，或失去通往原區域的路徑。M.E.G.CN 曾多次在樓層內設置補給點與通訊中繼，均在數日內失效，目前僅保留少量可供短暫休整與聯絡的標記點，且不保證每次進入時都能找到<sup class="fn">[1]</sup>。</p>
 <h3>入口</h3><ul><li>部分探索者曾由沒有門把、表面平整的純白色門進入；門後是否連接 Level -616，似乎並不固定。</li><li>在空白房間內持續注視沒有接縫的牆面，等待門扉出現。不要敲擊或破壞牆面。</li><li>少數情況下，可能意外穿過不穩定的空間裂縫。裂縫位置與出現條件無法預測，不建議刻意尋找。</li></ul>
@@ -437,7 +464,7 @@ fc:{n:'契約與人員紀錄',l:3,h:()=>`<h2>機密檔案：契約與相關人�
 <details><summary>親身參與的事件</summary><ul><li><b>進入實驗場、與白日之影交談</b>：本人口述，對應錄音見通訊與錄音的初期紀錄。</li><li><b>契約成立與姓名被取走</b>：本人口述與設備錄音。</li><li><b>根基事件</b>：現場紀錄。他接到召喚後離隊，前往樓層根基。</li></ul></details>
 <details><summary>陳述與推測</summary><ul><li><b>本人陳述</b>：進入原因、契約過程、對白日之影的描述。</li><li><b>研究部判斷</b>：契約與身體異化之間的關聯、行為模式側寫。</li><li><b>尚有爭議</b>：見「契約關係評估」。</li></ul></details>
 <h3 id="fc-body">契約與身體異化</h3>
-<details><summary>異常標記</summary>背部肩胛骨周圍，向脊椎及下背部延伸。並非刺青或傷疤，結構似乎已與身體組織結合。特工通常刻意遮蔽，沒有證據顯示它具有獨立意識。REC-07 曾記錄隊員提及其背部會在能力使用後發熱；目前尚無法確認熱源是否來自標記本身，或與「觸及靈魂」能力有直接關係。</details>
+<details><summary>異常標記</summary>背部肩胛骨周圍，向脊椎及下背部延伸。並非刺青或傷疤，結構似乎已與身體組織結合。特工通常刻意遮蔽，沒有證據顯示它具有獨立意識。背部在能力使用後會發熱；熱源是否來自標記本身，或與「觸及靈魂」能力有直接關係，目前尚無法確認。</details>
 <details><summary>眼部異常</summary>眼睛偶爾出現非自然的環狀紋路，可能與契約及靈魂感知有關，在能力發動時最為明顯。眼睛仍具一般人類的生理特徵，沒有證據顯示能免疫物理傷害。</details>
 <details><summary>觸及靈魂</summary>特工如此稱呼自己的能力，可能察覺靈魂與肉體的異常連結、靈魂被撕裂或移除的跡象、外來靈魂附著，以及靈魂活動的痕跡。它不是讀心術，也不能直接辨識所有實體的真實身分。</details>
 <details><summary>契約贈禮</summary>據稱 Shade 認為長柄立鐮「很有趣」，因此交給特工。它能斬傷幻影、笑魘等非實體之物；面對實體敵人，一次格擋就可能崩裂。</details>
@@ -506,11 +533,11 @@ appx:{n:'研究附錄',l:2,h:()=>`<h2>研究附錄</h2>
 <details id="apx-a"><summary>附錄 A：實驗中止協議補充</summary>實驗中止協議觸發後，直到探索者離開該房間前，房間造成的後續傷害會受到限制；協議不會治療既有傷勢，也不代表所有異常效果立即解除。該協議同樣適用於特殊異常個體，相關事件見根基事件。</details>
 <details id="apx-b"><summary>附錄 B：關於白日之影的定位</summary>研究部早期曾提出三項假說：樓層管理者、樓層本身產生的意識、外來異常實體。現行結論是：它既不是管理者，也不是單純的樓層意識，而是與樓層共生的獨立個體。它在樓層之外是否有獨立的本體，仍有爭議（見實體觀測檔案）。</details>
 <div class="card">最終研究備註：值得持續關注的，不只是房間設備與試煉本身的危險性，也包括長期存在於樓層內的白日之影。M.E.G.CN 建議維持觀察、避免主動干涉。它的能力、限制與代價見${L('shade','實體觀測檔案')}。</div><div class="card warn">契約關係評估、通訊測試與保存音檔對照等資料列為高度機密，見${L('fc','契約與人員紀錄')}。</div>`},
-inc:{n:'根基事件',l:3,h:()=>`<h2>機密檔案：樓層根基完整度異常事件</h2><div class="meta"><div><i>檔案編號</i>M.E.G.CN-INCIDENT-███</div><div><i>事件日期</i>20██/09/12（今年度・序 13；對應通訊紀錄 09）</div><div><i>狀態</i>部分解密</div><div><i>相關</i>特工、白日之影</div></div>
+inc:{n:'根基事件',l:3,h:()=>`<h2>機密檔案：樓層根基完整度異常事件</h2><div class="meta"><div><i>檔案編號</i>M.E.G.CN-INCIDENT-███</div><div><i>事件日期</i>20██/09/12（今年度・序 13；對應通訊紀錄 08）</div><div><i>狀態</i>部分解密</div><div><i>相關</i>特工、白日之影</div></div>
 <details open><summary>樓層根基與兩種判定</summary>實驗場可能存在維持穩定的核心結構「樓層根基」，其位置與外觀均未知。部分紀錄顯示，持續破壞房間、設備與運作結構後，樓層會出現連鎖異常；相較之下，為救援受困者而破壞機關的案例，尚未觀察到明確的根基損傷。兩者差異可能與破壞規模、位置或行為目的有關，但目前無法確認。因此存在兩種機制：<br><b>業力傾向</b>：記錄行動對其他生命造成的影響，包括是否協助他人、傷害生命、為自身利益犧牲他人、承擔後果，以及造成傷害後是否補救；它描述的是行為後果，不等同於單次善惡判決。<br><b>根基完整度</b>：記錄樓層核心結構是否受損，包括破壞核心設備、大規模破壞結構、強行干涉空間連結，以及非必要地破壞穩定。前者偏向行為對生命造成的影響，後者偏向樓層結構本身的狀態。兩者可能互相影響，但目前沒有證據能還原其判定方式，也不能互相替代。</details>
-<details><summary>崩解事件的處置流程</summary><ol><li><b>召喚</b>：樓層根基遭到嚴重破壞、實驗系統失控時，白日之影會召喚與其有契約關係的特工介入。特工了解它對人類承受能力與傷害程度的認知缺陷，會設法阻止它在失控時進一步擴大破壞。他離隊前的那則通訊，就是對這次召喚的回應（見「事件經過」）。</li><li><b>交涉</b>：特工先詢問流浪者是否願意停止破壞並直接離開（對話見通訊紀錄 09）。</li><li><b>分歧</b>：在本次根基崩解事件中，接受特工勸離、選擇逃跑，或在交戰中被特工制伏的進入者，都會被傳送至 Level 995「因果之地遊樂園」。這是本次事件的處置方式，不代表一般情況下的離開者都會被送往該處。</li><li><b>實驗中止</b>：特工遭到重創、已無法繼續行動時，樓層原有的實驗中止協議再度觸發，所有實驗暫停，房間停止崩解。</li><li><b>現身</b>：白日之影親自現身，詢問倒下的特工是否還能繼續（見通訊紀錄 06、09）。</li><li><b>最終階段</b>：若特工無法繼續介入，白日之影將接替其位置，成為最終的敵對目標，直接對仍留在樓層內的流浪者發動攻擊，範圍涵蓋整座樓層。現有紀錄未顯示能以物理攻擊擊敗它。</li><li><b>後續處置</b>：特工不因流浪者過去的選擇而否定其停止傷害的可能。依本次事件紀錄，只要願意停止，即使已造成大量損害，仍可能獲得離開現場的機會；但既有傷害不會因此消失，相關人員仍須在 Level 995 面對後續處置。若白日之影在最終階段控制局面，曾對樓層及其他生命造成嚴重傷害者，可能無法離開，之後的去向列為機密。</li></ol><p class="note">本節流程依本次事件的有限紀錄重建，不代表所有根基異常都必然依相同順序發生；部分階段可能重疊，亦可能因現場條件而改變。</p></details>
+<details><summary>崩解事件的處置流程</summary><ol><li><b>召喚</b>：樓層根基遭到嚴重破壞、實驗系統失控時，白日之影會召喚與其有契約關係的特工介入。特工了解它對人類承受能力與傷害程度的認知缺陷，會設法阻止它在失控時進一步擴大破壞。他離隊前的那則通訊，就是對這次召喚的回應（見「事件經過」）。</li><li><b>交涉</b>：特工先詢問流浪者是否願意停止破壞並直接離開（對話見通訊紀錄 08）。</li><li><b>分歧</b>：在本次根基崩解事件中，接受特工勸離、選擇逃跑，或在交戰中被特工制伏的進入者，都會被傳送至 Level 995「因果之地遊樂園」。這是本次事件的處置方式，不代表一般情況下的離開者都會被送往該處。</li><li><b>實驗中止</b>：特工遭到重創、已無法繼續行動時，樓層原有的實驗中止協議再度觸發，所有實驗暫停，房間停止崩解。</li><li><b>現身</b>：白日之影親自現身，詢問倒下的特工是否還能繼續（見通訊紀錄 06、08）。</li><li><b>最終階段</b>：若特工無法繼續介入，白日之影將接替其位置，成為最終的敵對目標，直接對仍留在樓層內的流浪者發動攻擊，範圍涵蓋整座樓層。現有紀錄未顯示能以物理攻擊擊敗它。</li><li><b>後續處置</b>：特工不因流浪者過去的選擇而否定其停止傷害的可能。依本次事件紀錄，只要願意停止，即使已造成大量損害，仍可能獲得離開現場的機會；但既有傷害不會因此消失，相關人員仍須在 Level 995 面對後續處置。若白日之影在最終階段控制局面，曾對樓層及其他生命造成嚴重傷害者，可能無法離開，之後的去向列為機密。</li></ol><p class="note">本節流程依本次事件的有限紀錄重建，不代表所有根基異常都必然依相同順序發生；部分階段可能重疊，亦可能因現場條件而改變。</p></details>
 <details><summary>事件經過</summary>多名探索者在連續試煉中的異常行為，使多個房間的規則同時失效。依現有資料，白日之影的召喚發生於根基完整度已開始下降、但尚未全面崩解之時；特工先向隊伍發出一則簡短通訊（未收錄於錄音），隨後離隊前往異常區域。約二十分鐘後，樓層才進入全面崩解階段：牆壁失去結構、房間重疊、重力方向改變、多個出口失效、試煉設備自行運作，並出現大量空間裂縫。REC-09 開頭的求援無線電，是特工抵達異常區域後向總部發出的第二次通訊，並非召喚本身；當時樓層內仍有多支隊伍。</details>
-<details><summary>影像 SEC-B02（完整度約 52%，無有效音軌，與 REC-09 對照）</summary>影像與 REC-09 並非同一時間碼系統。以下所列時間，除另有註明外，均以 REC-09 錄音時間為準；影像與錄音的對應關係，僅依可辨識的動作、聲音及設備停止時間交叉判讀。影像 00:00 約對應錄音 01:24。特工手持一件長柄鐮刀，在變形的走廊與數名探索者對峙，多次舉手示意停手，沒有主動揮擊（對應錄音 01:24–03:02 的勸阻）。由於白日之影具備聲音模仿能力，錄音中的人聲歸屬仍須以影像動作與通訊時序交叉判讀。錄音 03:30 起的碰撞，在影像中是迴避、格擋與限制對方行動，沒有明確的致命意圖。約 03:51 部分人影在畫面中消失，同時錄音出現遠處旋轉木馬般的音樂。REC-09 中白日之影所稱的「讓他們消失」，實際意義尚未完全確認；現有影像與傳送紀錄顯示，至少部分人員是在該時段被移出 Level -616，並無證據足以認定其遭到殺害。04:05 再次碰撞後他倒地，四周設備同時停止（對應 04:19 的靜止）。其後白日之影的聲音由畫外傳入，影像中沒有可辨識的形體。完整對話見通訊紀錄 09。</details>
+<details><summary>影像 SEC-B02（完整度約 52%，無有效音軌，與 REC-09 對照）</summary>影像與 REC-09 並非同一時間碼系統。以下所列時間，除另有註明外，均以 REC-09 錄音時間為準；影像與錄音的對應關係，僅依可辨識的動作、聲音及設備停止時間交叉判讀。影像 00:00 約對應錄音 01:24。特工手持一件長柄鐮刀，在變形的走廊與數名探索者對峙，多次舉手示意停手，沒有主動揮擊（對應錄音 01:24–03:02 的勸阻）。由於白日之影具備聲音模仿能力，錄音中的人聲歸屬仍須以影像動作與通訊時序交叉判讀。錄音 03:30 起的碰撞，在影像中是迴避、格擋與限制對方行動，沒有明確的致命意圖。約 03:51 部分人影在畫面中消失，同時錄音出現遠處旋轉木馬般的音樂。REC-09 中白日之影所稱的「讓他們消失」，實際意義尚未完全確認；現有影像與傳送紀錄顯示，至少部分人員是在該時段被移出 Level -616，並無證據足以認定其遭到殺害。04:05 再次碰撞後他倒地，四周設備同時停止（對應 04:19 的靜止）。其後白日之影的聲音由畫外傳入，影像中沒有可辨識的形體。完整對話見通訊紀錄 08。</details>
 <details><summary>後續</summary>特工停止行動後，房間停止崩解，部分出口重現。白日之影隨後出現，並接管空間結構，重新排列房間，移除部分房間，將探索者分散到不同空間。傳送對象見「分歧」；未被傳送離開、仍留在樓層內的人員，後續由白日之影處置。其處置方式與去向尚未完全解密。有倖存者稱在抵達前看見實驗場的房間逐漸消失，也有人聲稱看見持長柄鐮刀的 M.E.G.CN 人員倒在白色房間內；該人員其後已重新出現在人事與任務紀錄中。事件後特工接受處置，身體狀況逐步恢復，並重新具備基本行動能力。其後仍有新的受傷紀錄，原因與經過尚未完整確認（見今年度 09/16 通訊紀錄 P-06）；白日之影對特工再次受傷表現出明顯的警戒與保護傾向。</details>`},
 unf:{n:'未歸檔資料',l:1,h:()=>`<h2>未歸檔資料</h2><div class="meta"><div><i>資料來源</i>未知／自動寫入／待確認</div><div><i>狀態</i>未完成歸檔（部分條目無法重現）</div></div>
 <p>下列項目無法歸入任何正式分類。M.E.G.CN 已複製原始檔案，異常版本獨立封存；內容未經證實。部分條目重新開啟時，位置或字句與上次不同，無法確認哪一版是原始版本。技術組備註：部分文本詞彙與異常能力條目在游標停留或觸碰時會出現輕微殘響，原因待查。</p>
@@ -523,22 +550,22 @@ unf:{n:'未歸檔資料',l:1,h:()=>`<h2>未歸檔資料</h2><div class="meta"><d
 <details id="u-007"><summary><span class="sum-code">U-007</span>（標題缺失）</summary><p class="lgd">原始檔案：無法確認／異常狀況：目錄中有此條目，內容無法開啟；每次查閱時列出的位置不同</p><p class="it">（空白。）</p></details>`},
 rec:{n:'通訊與錄音',l:3,h:()=>recHtml(),i:recInit},
 };
-function go(id){const p=P[id];if(typeof tok!=='undefined')tok++;cur=id;if(p.l>clr){$('#main').innerHTML=`<div class="card warn"><h2>▮ 權限不足</h2>此頁需要權限 ${p.l} 級。你目前為 ${clr} 級。<br><button id="ga">進行認證</button></div>`;$('#ga').onclick=()=>$('#auth').showModal()}
+function go(id){if(id=='coll'&&!EGG.coll)id='home';const p=P[id];if(typeof tok!=='undefined')tok++;cur=id;if(p.l>clr){$('#main').innerHTML=`<div class="card warn"><h2>▮ 權限不足</h2>此頁需要權限 ${p.l} 級。你目前為 ${clr} 級。<br><button id="ga">進行認證</button></div>`;$('#ga').onclick=()=>$('#auth').showModal()}
 else{$('#main').innerHTML=p.h()+nxt(id)+rel(id);p.i&&p.i()}
 $('#main').style.animation='none';void $('#main').offsetWidth;$('#main').style.animation='';nav();post();scrollTo(0,0);whisper()}
-const GR=[['01 · 正式資料',['home','rules','space','base','anom','exp','sim']],['02 · 研究資料',['shade','hist','f1','f2','appx']],['03 · 機密檔案',['fc','inc']],['04 · 通訊與音訊',['rec']],['05 · 非正式資料',['unf','talk']]];
-function nav(){const N=$('#nav');N.innerHTML='';GR.forEach(([g,ids])=>{const bs=ids.filter(k=>P[k]&&!(P[k].hid&&!found&&clr<3));if(!bs.length)return;const d=document.createElement('div');d.className='grp';d.innerHTML='<span>'+g+'</span>';bs.forEach(k=>{const p=P[k],b=document.createElement('button');b.textContent=(p.l>clr?'🔒 ':'')+p.n;b.className=(k==cur?'cur ':'')+(p.l>clr?'lock':'');b.onclick=()=>go(k);d.append(b)});N.append(d)});$('#badge').textContent='權限 '+clr+' 級';$('#mt').textContent='☰ 目錄：'+P[cur].n}
+const GR=[['01 · 正式資料',['home','rules','space','base','anom','exp','sim']],['02 · 研究資料',['shade','hist','f1','f2','appx']],['03 · 機密檔案',['fc','inc']],['04 · 通訊與音訊',['rec']],['05 · 非正式資料',['unf','talk']],['06 · 私人',['coll']]];
+function nav(){const N=$('#nav');N.innerHTML='';GR.forEach(([g,ids])=>{const bs=ids.filter(k=>P[k]&&(k!='coll'||EGG.coll)&&!(P[k].hid&&!found&&clr<3));if(!bs.length)return;const d=document.createElement('div');d.className='grp';d.innerHTML='<span>'+g+'</span>';bs.forEach(k=>{const p=P[k],b=document.createElement('button');b.textContent=(p.l>clr?'🔒 ':'')+p.n;b.className=(k==cur?'cur ':'')+(p.l>clr?'lock':'')+(k=='coll'?' eg':'');b.onclick=()=>go(k);d.append(b)});N.append(d)});$('#badge').textContent='權限 '+clr+' 級';$('#mt').textContent='☰ 目錄：'+P[cur].n}
 const IDX={};const tx=k=>IDX[k+clr+named]||(IDX[k+clr+named]=(()=>{const d=document.createElement('div');d.innerHTML=P[k].h();return d.textContent.replace(/\s+/g,' ').replace(/Shade/g,(P[k].l==1||!named)?'白日之影':'Shade').replace(/我們的特工/g,AN(k)&&clr<2?'我們的探員':'我們的特工').replace(/特工/g,AN(k)&&clr<2?'某探員':'特工').replace(/康幕委員會/g,P[k].l==1?'M.E.G.CN':'康幕委員會')})());
-function post(){document.querySelectorAll('#main .nm').forEach(e=>e.textContent=clr>=2?'特工':'██');$('#side').classList.remove('open');document.querySelectorAll('#main .q').forEach(q=>{const t=q.firstChild.textContent;q.classList.add(t=='特工'?'qa':/^(Shade|未知)/.test(t)?'qs':'qo')});const m=$('#main'),n=m.querySelectorAll('details').length;if(n>=3&&cur!='rec'&&m.firstElementChild)m.firstElementChild.insertAdjacentHTML('afterend','<p class="tools"><button data-all="1">展開全部</button><button data-all="0">收合全部</button></p>')}
+function post(){document.querySelectorAll('#main .nm').forEach(e=>e.textContent=clr>=2?'特工':'██');$('#side').classList.remove('open');document.querySelectorAll('#main .q').forEach(q=>{const t=q.firstChild.textContent;q.classList.add(t=='特工'?'qa':/^(Shade|未知)/.test(t)?'qs':'qo')});const m=$('#main'),n=m.querySelectorAll('details').length;if(n>=3&&cur!='rec'&&cur!='coll'&&m.firstElementChild)m.firstElementChild.insertAdjacentHTML('afterend','<p class="tools"><button data-all="1">展開全部</button><button data-all="0">收合全部</button></p>')}
 $('#main').addEventListener('click',e=>{const t=e.target;if(t.dataset.all!=null)document.querySelectorAll('#main details').forEach(d=>d.open=t.dataset.all=='1')});
 const AN=k=>(P[k].l==1&&!['talk','sim'].includes(k))||['f1','appx','inc'].includes(k);
-const need=()=>P[cur]&&(P[cur].l==1||!named||AN(cur));
+const need=()=>P[cur]&&cur!='coll'&&(P[cur].l==1||!named||AN(cur));
 const cv=(t,k)=>{if(AN(k)&&clr<2)t=t.replace(/我們的特工/g,'我們的探員').replace(/特工/g,'某探員');if(P[k].l==1)t=t.replace(/(?:M\.E\.G\.(?:CN)?\s*)?康幕委員會(?:（最高管理層）)?/g,'M.E.G.CN');return t};
 const entW=r=>{const w=document.createTreeWalker(r,NodeFilter.SHOW_TEXT),L=[];while(w.nextNode())L.push(w.currentNode);L.forEach(n=>{const p=n.parentElement;if(!p||p.closest('#lg0,[data-k],.nm,.keep'))return;const v=cv(n.nodeValue,cur),sh=(P[cur].l==1||!named)&&v.includes('Shade');if(!sh){if(v!==n.nodeValue)n.nodeValue=v;return}const f=document.createDocumentFragment();const pc=v.split('Shade'),CJ='[\u3000-\u9fff，。、：；！？（）「」『』]';for(let q=0;q<pc.length-1;q++){pc[q]=pc[q].replace(new RegExp('('+CJ+') $'),'$1');pc[q+1]=pc[q+1].replace(new RegExp('^ ('+CJ+')'),'$1')}pc.forEach((t,i)=>{if(i){const e=document.createElement('span');e.className='ent';e.title='M.E.G.CN 對它的正式稱呼';e.textContent='白日之影';f.append(e)}f.append(t)});n.replaceWith(f)})};
 let moBusy=false,moLinkQueued=false;new MutationObserver(rs=>{if(moBusy)return;moBusy=true;try{if(need())rs.forEach(r=>{const n=r.type=='characterData'?r.target.parentNode:r.target;if(n&&n.nodeType==1&&n.closest('#main')&&!n.closest('.lg'))entW(n)});if(!moLinkQueued){moLinkQueued=true;requestAnimationFrame(()=>{moLinkQueued=false;if(moBusy)return;moBusy=true;try{linkify();linkIds()}finally{moBusy=false}})}}finally{moBusy=false}}).observe($('#main'),{childList:true,subtree:true,characterData:true});
 function nameIt(){if(named)return;named=true;saveState();document.querySelectorAll('#main .ent').forEach(e=>{if(P[cur].l>1)e.replaceWith('Shade')});toast('特工替它取了暱稱：Shade。隱藏檔案中的稱呼已更新。')}
 $('#mt').onclick=()=>$('#side').classList.toggle('open');
-$('#sq').oninput=e=>{const q=e.target.value.trim(),o=[];if(q.length>=2){const sn=(t,i)=>t.slice(Math.max(0,i-14),i+30);for(const k in P){if(['sim','talk','rec'].includes(k)||P[k].l>clr)continue;const t=tx(k),i=t.indexOf(q);if(i>=0)o.push([k,P[k].n,sn(t,i)])}if(clr>=3)REC.forEach((r,j)=>{const t=(r[1]+' '+r[3]).replace(/Shade/g,named?'Shade':'白日之影').replace(/\n[a-z]\|/g,' ').replace(/^[a-z]\|/,''),i=t.indexOf(q);if(i>=0)o.push(['rec#'+j,'紀錄 '+r[0]+'：'+r[1],sn(t,i)])})}
+$('#sq').oninput=e=>{const q=e.target.value.trim(),o=[];if(q.length>=2){const sn=(t,i)=>t.slice(Math.max(0,i-14),i+30);for(const k in P){if(['sim','talk','rec','coll'].includes(k)||P[k].l>clr)continue;const t=tx(k),i=t.indexOf(q);if(i>=0)o.push([k,P[k].n,sn(t,i)])}if(clr>=3)REC.forEach((r,j)=>{const t=(r[1]+' '+r[3]).replace(/Shade/g,named?'Shade':'白日之影').replace(/\n[a-z]\|/g,' ').replace(/^[a-z]\|/,''),i=t.indexOf(q);if(i>=0)o.push(['rec#'+j,'紀錄 '+r[0]+'：'+r[1],sn(t,i)])})}
 $('#sr').innerHTML='';o.slice(0,8).forEach(([k,n,x])=>{const b=document.createElement('button');b.innerHTML=n+'<small></small>';b.lastChild.textContent='…'+x+'…';b.onclick=()=>{if(k.startsWith('rec#')){const ix=Number(k.slice(4));go('rec');const rid=REC[ix]&&REC[ix][0];const d=[...document.querySelectorAll('#main details')].find(x=>{const sm=x.querySelector(':scope > summary');return sm&&sm.textContent.trim().startsWith('紀錄 '+rid+'：')});if(d){let n=d;while(n&&n.id!=='main'){if(n.tagName==='DETAILS')n.open=true;n=n.parentElement}d.scrollIntoView({behavior:'smooth',block:'start'})}}else go(k);$('#sr').innerHTML='';$('#sq').value=''};$('#sr').append(b)});if(q.length>=2&&!o.length)$('#sr').innerHTML='<small style="color:var(--mut)">沒有符合的內容（或權限不足）。</small>'};
 addEventListener('scroll',()=>{const h=document.documentElement;$('#pg').style.width=(scrollY/Math.max(1,h.scrollHeight-innerHeight)*100)+'%';$('#up').classList.toggle('on',scrollY>600)});
 document.body.insertAdjacentHTML('beforeend','<button id="up" aria-label="回到頂端">↑</button>');$('#up').onclick=function(){scrollTo(0,0);document.documentElement.scrollTop=0;document.body.scrollTop=0;this.blur()};
@@ -575,7 +602,7 @@ const C={
 '筆記本':['> 沒有署名。第一頁反覆寫著同一個稱呼。','> 那是權限二的鑰匙。'],
 'tg-p-07':['> 特殊實驗紀錄 06：「還能繼續嗎？」','> 研究部：Shade 對「同意」的理解仍有明顯問題。'],
 'tg-p-12':['> 樓層崩壞預警。','> 一批進入者破壞結構，阻礙他人離開。','> 研究部：不得解讀為特工能完全控制 Shade。'],
-'樓層崩壞預警':['> TG-P-12。完整紀錄見通訊紀錄 09。','> 「不要。再繼續下去，就沒有任何人能離開了。」'],
+'樓層崩壞預警':['> TG-P-12。完整紀錄見通訊紀錄 08。','> 「不要。再繼續下去，就沒有任何人能離開了。」'],
 '實驗場':['> 空房間。六面平整的牆。你被注視著。','> 從第二間房開始，每處都有不同的規則與難題。'],
 '中止':['> 身體或精神狀態到達極限時，裝置停止、結構穩定、出口重開。','> 它不會治療你，只是停止傷害。此機制並非 M.E.G.CN 設置。'],
 '完成了':['> 它說過的話之一。','> 另外兩句：「這邊。」「結束了。」'],
@@ -591,7 +618,7 @@ const AL={'康幕':'megcn','康幕委員會':'megcn','almondwater':'杏仁水','
 '虹膜':'眼睛','帥不帥':'眼睛','隱形眼鏡':'眼睛','認得':'認人','贗品':'認人','擬態':'認人','複製':'認人',
 '後室的夜':'後室','backrooms':'後室','出口標示':'海報','好心的陌生人':'海報',
 '影子不協調':'影子','tgp12':'tg-p-12','tgp07':'tg-p-07',
-'崩壞預警':'樓層崩壞預警','樓層崩壞':'樓層崩壞預警','紀錄09':'樓層崩壞預警','白房間':'實驗場','空房間':'實驗場','testingground':'實驗場',
+'崩壞預警':'樓層崩壞預警','樓層崩壞':'樓層崩壞預警','紀錄08':'樓層崩壞預警','白房間':'實驗場','空房間':'實驗場','testingground':'實驗場',
 '實驗中止':'中止','中止機制':'中止','結束了':'完成了','這邊':'完成了','感知':'敏捷','屬性':'敏捷','數值':'敏捷',
 '魂':'靈魂','靈魂干涉':'靈魂','打架':'不喜歡打架','使命':'宣言','組織宣言':'宣言','太亮':'燈','燈光':'燈'};
 const al=$('#alog');$('#authbtn').onclick=()=>{al.textContent='';$('#auth').showModal()};$('#cl').onclick=()=>$('#auth').close();
@@ -600,7 +627,9 @@ $('#ok').onclick=async()=>{const v=$('#code').value.trim();$('#code').value='';a
 await type(['> 驗證中…']);
 if(u=='hint')return type(['權限二：它在筆記本第一頁寫下的稱呼。連點標題的樓層編號五次。','權限三：白日之影是組織的稱呼。特工替它取了一個暱稱，五個英文字母，意思是影子。','有些能力、物品與規則可以點。','其他可試的詞：'+Object.keys(C).filter(k=>/[\u4e00-\u9fff]/.test(k)).join('、')]);
 if(v=='還能繼續嗎')return type(['> 沒有人回答。','> 今天先不要了。']);
-const kk=u.replace(/[\s.．。]/g,'');const cc=C[AL[kk]||kk];if(cc)return type(cc);const L=v=='特工'?2:u=='shade'?3:0;
+const kk=u.replace(/[\s.．。]/g,'');const cc=C[AL[kk]||kk];if(cc)return type(cc);
+if(eggNorm(v)===EGG_SECRET&&EGG.gotKey){if(EGG.coll)return type(['> 門已經開著了。']);EGG.coll=true;eggSave();await type(['> 比對中……','> 這不是 M.E.G.CN 的密鑰。','> 這個入口不在任何權限表上。','> 第三層・私人。','> （有人讓開了一步。）']);document.dispatchEvent(new CustomEvent('egg:unlocked'));setTimeout(()=>{$('#auth').close();nav();go('coll')},900);return}
+const L=v=='特工'?2:u=='shade'?3:0;
 if(!L)return type(['> 代碼無效。','> 有人注視著這次嘗試。']);
 if(L<=clr)return type(['> 已具有同等或更高權限。']);
 clr=L;if(L==3)named=true;saveState();await type(['> 比對完成。','> 權限提升至 '+L+' 級。','> 歡迎，探員。']);setTimeout(()=>{$('#auth').close();go(cur)},700)};
@@ -1063,51 +1092,7 @@ a|不知道。等我有空吧。
 s|我會等。
 a|嗯哼，那就下次見囉。
 n|03:51　腳步聲漸遠，門被關上。背景嗡鳴聲恢復原本大小。`],
-['07','背部異常熱源與接觸事件','探索小隊通訊紀錄　夜間休整<br>檔案：REC-██-07　錄製：20██/06/29 23:07　時長：06:48（節錄）<br>來源：小隊頻道（某隊員按鍵卡住，持續開麥）　訊號：中，偶有爆音',`n|00:00　持續的低頻嗡鳴，遠處有規律的滴水聲。有人在翻動塑膠袋。
-o|隊員A：我好想吃熱的……隨便什麼熱的都行。
-o|隊員B：+1。冷罐頭我已經吃到有點想哭了。
-o|隊員C：誰有打火機？
-o|隊員B：沒有，唯一的剛剛也被地板吞掉了。
-o|隊員A：平底鍋呢？
-o|隊員C：你看我們像有帶平底鍋的樣子嗎。
-n|01:10　拉鍊聲與翻找聲，約15秒。
-o|隊員A：……半包濕紙巾，一支沒水的筆，還有……鋁箔紙？皺成這樣。
-o|隊員B：這能幹嘛？當鍋子？尺寸是夠啦，可是拿什麼加熱？
-n|01:48　餅乾被咬碎的聲音，距離麥克風較遠。對話中斷約4秒。
-o|隊員C：特工，你背不是會發燙嗎？就那個，能力的副作用。
-n|02:01　咀嚼聲停止。約3秒無人說話。
-a|……你們不會是想拿我當爐子吧？
-o|隊員A：可以嗎？
-a|哈哈哈！這也太有創意了！來來來，我配合！
-n|02:31　衣料摩擦與重物落地的悶響，疑似有人趴下。
-a|本日限定燒烤店，即將開張～
-o|隊員B：你別亂動啊。
-a|是是是，收到。
-n|03:05　接下來的約20秒，只聽得見遠處風扇規律轉動的聲音。鋁箔紙邊緣傳來細微的劈啪聲。隊員A低聲說了一句〔無法辨識〕。
-o|隊員A：欸，真的有熱！現在可以倒了嗎？
-a|可以可以，慢慢倒，別灑到我身上就好。
-n|03:40　罐頭滑動聲，接著是「滋」的一聲。所有人同時安靜。
-o|隊員C：特工，你真的不會燙傷？
-a|放心啦，溫度我自己有數。怎麼樣，這廚具是不是很高級？自動加熱，附贈智慧控溫。
-o|隊員B：高級在哪？
-o|隊員C：在於他會講話。
-n|04:22　笑聲（三人以上），餐具刮擦聲，一度蓋過語音。
-o|隊員A：……好吃。熱的真的不一樣。
-a|那當然，本店對溫度很講究的。
-o|隊員B：老闆，再來一份！
-a|抱歉，今天限量，已經打烊了。
-o|隊員C：欸，這麼難得，拍張照紀念一下？
-a|不行。
-n|05:14　回答幾乎沒有間隔，語速明顯快於前後對話。隊員C停頓約3秒。
-o|隊員C：咦？為什麼？
-a|這個嘛～料理可以公開製作，攝影服務不提供。商業機密！
-o|隊員B：小氣。
-a|沒辦法呀，開店不容易。
-n|05:52　眾人嬉鬧聲。夾雜一陣衣料拉扯聲，疑似有人在整理衣服下襬。
-o|錄音者無意間記下他對「拍照」的反應速度與其餘對話明顯不同，其後立即以玩笑掩飾。推測他拒絕的是背部被拍到，而非料理本身。
-o|研究部：無法確認此能力與背部異常標記是否有關。特工拒絕說明。
-i|罐頭放在他們中間，是熱的。第一個開口的人，先伸了手。`],
-['10','實驗中止後之行為觀察','特工聯絡對講機　現行規則形成後<br>檔案：REC-██-10　錄製：20██/09/14 14:30　時長：02:12<br>來源：特工聯絡對講機　訊號：良好',`n|00:00　走動聲，腳步輕，節奏不均。
+['09','實驗中止後之行為觀察','特工聯絡對講機　現行規則形成後<br>檔案：REC-██-09　錄製：20██/09/14 14:30　時長：02:12<br>來源：特工聯絡對講機　訊號：良好',`n|00:00　走動聲，腳步輕，節奏不均。
 a|最近的房間好像比較簡單了？
 s|是。
 a|出口也變多了。那些會傷人的裝置呢？
@@ -1183,7 +1168,7 @@ a|希望如此。
 n|03:40　特工低咳數聲。錄音在此處中斷。
 o|研究部：特工仍保有拒絕權，但白日之影對「同意」的理解仍有明顯問題。
 o|特工的呼吸聲與語速在 02:44 前後有明顯改變，推測他是在這時才恢復到能夠正常說話的狀態。`],
-['09','TG-P-12 樓層結構崩解事件通訊紀錄','M.E.G.CN 通訊紀錄　完整<br>檔案：REC-██-09（TG-P-12）　錄製：20██/09/12　時間不明　時長：06:54<br>來源：特工隨身無線電（開放頻道，總部同步收錄）　訊號：弱，受空間扭曲影響',`n|00:00　空間重疊的低鳴聲壓過無線電底噪，其間夾著混凝土被緩慢拉扯的悶響，反覆錯位。
+['08','TG-P-12 樓層結構崩解事件通訊紀錄','M.E.G.CN 通訊紀錄　完整<br>檔案：REC-██-08（TG-P-12）　錄製：20██/09/12　時間不明　時長：06:54<br>來源：特工隨身無線電（開放頻道，總部同步收錄）　訊號：弱，受空間扭曲影響',`n|00:00　空間重疊的低鳴聲壓過無線電底噪，其間夾著混凝土被緩慢拉扯的悶響，反覆錯位。
 a|【開放頻道】這裡是特工，我現在位於異常區域，空間結構正在崩壞，請求支援，收到請回答，OVER。
 n|00:19　無線電無回應，只有雜訊，約4秒。
 a|……收不到嗎？算了，我繼續記錄。OVER。
@@ -1278,7 +1263,7 @@ n|02:33　約15秒只有紙張與衣料的細響，沒有人說話。
 n|02:48　紙張被合起，椅腳在地面上挪動了一下。
 a|……好吧。這個先不記了。
 n|03:28　錄音停止。`],
-['08','聲音模仿能力觀察紀錄','特工聯絡對講機　日常交流<br>檔案：REC-██-08　錄製：20██/02/11 16:20　時長：01:52<br>來源：特工聯絡對講機　訊號：良好',`n|00:00　開機提示音響起，背景有細微的電流聲。
+['07','聲音模仿能力觀察紀錄','特工聯絡對講機　日常交流<br>檔案：REC-██-07　錄製：20██/02/11 16:20　時長：01:52<br>來源：特工聯絡對講機　訊號：良好',`n|00:00　開機提示音響起，背景有細微的電流聲。
 a|欸，Shade。你會模仿聲音嗎？
 s|會。
 n|00:19　接下來的約4秒，只聽得見遠處風扇規律轉動的聲音。
@@ -1520,13 +1505,227 @@ a|怕啊。
 n|00:34　笑聲很短，鞋底在地面輕輕摩擦。
 u|那為什麼還在說話？
 a|因為你也在說話啊。
-n|00:47　錄音在此處中斷，後續約四分鐘無法還原。`],
+n|00:47　錄音在此處中斷，後續約四分鐘無法還原。`]
 ];
 let tok=0;const sl=ms=>new Promise(r=>setTimeout(r,ms));
-function recHtml(){const privateIds=['P-01','P-02','P-03','P-04','P-05','P-06','P-07','P-08','P-09','P-10'];const stp=r=>{if(privateIds.includes(r[0]))return '';const t=['<span class="stamp s2">正式存檔</span>','<span class="stamp s3">已核閱</span>'];if(/降噪/.test(r[2]))t.push('<span class="stamp s2">已降噪</span>');if(/部分損毀|殘缺/.test(r[2]))t.push('<span class="stamp">訊號殘缺</span>');return '<div class="stamps">'+t.join('')+'</div>'};return '<h2>通訊與私人留存紀錄</h2><p class="lgd"><span class="a">■ 特工</span>　<span class="s">■ Shade</span>　<span style="color:var(--mut)">■ 旁白／其他</span></p><p class="priv-note">標示「私人留存」者，為特工個人保存、未納入 M.E.G.CN 正式檔案的錄音、語音備忘或私人紀錄。兩類編號各自獨立：官方檔案為 REC 系列（01–10，檔案代號 REC-██-nn），私人留存為 P 系列（P-01–P-10，檔案代號 PRV-██-nn）。</p>'+(()=>{const one=(r,i)=>`<details ${r[0]=='01'?'open':''}><summary>紀錄 ${r[0]}：${r[1]} ${privateIds.includes(r[0])?'<span class="priv-flag">私人留存</span>':''}</summary><div class="lgd" style="color:var(--mut)">${r[2]}</div>${stp(r)}<button data-p="${i}">▶ 播放</button> <button data-f="${i}">展示紀錄</button> <button data-x>■ 停止</button><div class="lg" id="lg${i}"></div></details>`;return [['官方檔案（REC 系列・M.E.G.CN 正式收錄）',['01','02','03','04','05','06','07','08','09','10']],['私人留存（P 系列・特工個人保存，未納入正式檔案）',['P-01','P-02','P-03','P-04','P-05','P-06','P-07','P-08','P-09','P-10']],['時間不明（I-06 行為矯正錄音）',['I-06/01','I-06/02','I-06/03','I-06/04','I-06/05','I-06/06','I-06/07']]].map(([g,ids],gi)=>`<details class="rg" ${gi==0?'open':''}><summary><b>${g}</b>（${ids.length}）</summary>${ids.map(id=>{const i=REC.findIndex(r=>r[0]==id);return one(REC[i],i)}).join('')}</details>`).join('')})()}
-function line(el,s){const[k,...t]=s.split('|'),x=t.join('|'),d=document.createElement('div');d.className='ln '+(k=='u'?'s':k=='i'?'i it':k);if(k=='a'||k=='s'||k=='u')d.innerHTML='<b>'+(k=='a'?'特工':k=='u'?'白日之影':'Shade')+'：</b><span></span>';else d.innerHTML='<span></span>';el.append(d);return d.lastChild}
-async function play(i,full){const m=++tok,el=$('#lg'+i);el.innerHTML='';let fol=true;el.onscroll=()=>{fol=el.scrollHeight-el.scrollTop-el.clientHeight<48};el.scrollIntoView({block:'nearest'});const fl=()=>{if(fol)el.scrollTop=el.scrollHeight};for(const s of REC[i][3].split('\n')){if(m!=tok)return;if(i==0&&!named&&(full||s.includes('那就 Shade 吧')))nameIt();const sp=line(el,s),x=s[0]=='n'?'（'+s.slice(2)+'）':s[0]=='i'?'↳ '+s.slice(2):s.slice(2);if(full){sp.textContent=x;continue}fl();await sl(s[0]=='n'?700:450);for(let c=1;c<=x.length;c++){if(m!=tok)return;sp.textContent=x.slice(0,c);fl();await sl(26)}}if(full)el.scrollTop=0;else fl()}
+function recHtml(){const privateIds=['P-01','P-02','P-03','P-04','P-05','P-06','P-07','P-08','P-09','P-10'];const stp=r=>{if(privateIds.includes(r[0]))return '';const t=['<span class="stamp s2">正式存檔</span>','<span class="stamp s3">已核閱</span>'];if(/降噪/.test(r[2]))t.push('<span class="stamp s2">已降噪</span>');if(/部分損毀|殘缺/.test(r[2]))t.push('<span class="stamp">訊號殘缺</span>');return '<div class="stamps">'+t.join('')+'</div>'};return '<h2>通訊與私人留存紀錄</h2><p class="lgd"><span class="a">■ 特工</span>　<span class="s">■ Shade</span>　<span style="color:var(--mut)">■ 旁白／其他</span></p><p class="priv-note">標示「私人留存」者，為特工個人保存、未納入 M.E.G.CN 正式檔案的錄音、語音備忘或私人紀錄。兩類編號各自獨立：官方檔案為 REC 系列（01–09，檔案代號 REC-██-nn），私人留存為 P 系列（P-01–P-10，檔案代號 PRV-██-nn）。</p>'+(()=>{const one=(r,i)=>`<details ${r[0]=='01'?'open':''}><summary>紀錄 ${r[0]}：${r[1]} ${privateIds.includes(r[0])?'<span class="priv-flag">私人留存</span>':''}</summary><div class="lgd" style="color:var(--mut)">${r[2]}</div>${stp(r)}<button data-p="${i}">▶ 播放</button> <button data-f="${i}">展示紀錄</button> <button data-x>■ 停止</button><div class="lg" id="lg${i}"></div></details>`;return [['官方檔案（REC 系列・M.E.G.CN 正式收錄）',['01','02','03','04','05','06','07','08','09']],['私人留存（P 系列・特工個人保存，未納入正式檔案）',['P-01','P-02','P-03','P-04','P-05','P-06','P-07','P-08','P-09','P-10']],['時間不明（I-06 行為矯正錄音）',['I-06/01','I-06/02','I-06/03','I-06/04','I-06/05','I-06/06','I-06/07']]].map(([g,ids],gi)=>`<details class="rg" ${gi==0?'open':''}><summary><b>${g}</b>（${ids.length}）</summary>${ids.map(id=>{const i=REC.findIndex(r=>r[0]==id);return one(REC[i],i)}).join('')}</details>`).join('')})()}
+function line(el,s){const[k,...t]=s.split('|'),x=t.join('|'),d=document.createElement('div');d.className='ln '+(k=='u'?'s':k=='i'?'i it':k=='b'?'a':k);if(k=='a'||k=='s'||k=='u'||k=='b')d.innerHTML='<b>'+(k=='a'?'特工':k=='b'?'男孩':k=='u'?'白日之影':'Shade')+'：</b><span></span>';else d.innerHTML='<span></span>';el.append(d);return d.lastChild}
+async function play(i,full){const m=++tok,el=$('#lg'+i);el.innerHTML='';let fol=true;el.onscroll=()=>{fol=el.scrollHeight-el.scrollTop-el.clientHeight<48};el.scrollIntoView({block:'nearest'});const fl=()=>{if(fol)el.scrollTop=el.scrollHeight};for(const s of REC[i][3].split('\n')){if(m!=tok)return;if(i==0&&!named&&(full||s.includes('那就 Shade 吧')))nameIt();const sp=line(el,s),x=s[0]=='n'?'（'+s.slice(2)+'）':s[0]=='i'?'↳ '+s.slice(2):s.slice(2);if(full){sp.textContent=x;continue}fl();await sl(s[0]=='n'?700:450);for(let c=1;c<=x.length;c++){if(m!=tok)return;sp.textContent=x.slice(0,c);fl();await sl(26)}}if(full){el.scrollTop=0;document.dispatchEvent(new CustomEvent('rec:ended',{detail:{id:REC[i][0],index:i}}))}else{fl();if(m==tok)document.dispatchEvent(new CustomEvent('rec:ended',{detail:{id:REC[i][0],index:i}}))}}
 function recInit(){$('#main').onclick=e=>{const t=e.target;if(t.dataset.p!=null)play(+t.dataset.p);if(t.dataset.f!=null)play(+t.dataset.f,1);if(t.dataset.x!=null)tok++}}
+
+/* ===== Shade 的私人收藏：五段復現片段（非 M.E.G.CN 錄音）===== */
+REC.push(
+['C-01','傷患','復現片段　非 M.E.G.CN 錄音　無檔案代號<br>片段年代：特工幼年',`n|雨聲、遠處車量呼嘯而過，偶爾傳來微弱的動物叫聲。雨落在傘上的窸窣、布料被拉住的聲音。
+o|大人：別過去，那邊很危險。
+b|可是牠流血了。
+o|大人：我知道。過來吧，我可以找人處理。
+b|牠一直在叫……是不是很痛？
+o|大人：這種傷不能隨便碰。弄不好的話可能會造成二次傷害。
+n|短暫沉默，只有雨聲。
+b|那！可以拿毛巾嗎？
+o|大人：什麼？
+b|還有紙箱！不要直接碰牠的話，把牠放進箱子裡帶走可以嗎？
+o|大人：……等我一下，你先在這裡看著，不要亂動。
+n|腳步聲遠去。男孩蹲下，衣物摩擦聲。
+b|沒事，沒事……不要害怕。
+n|一陣窸窣聲。而後是約5分鐘的雨聲。
+o|大人：這裡有毛巾和紙箱……你怎麼把外套脫了？
+b|因為，牠剛剛一直在發抖。
+o|大人：唉……真拿你沒辦法。會冷嗎？
+b|還好！先讓牠進去吧。
+n|紙箱與絨毛摩擦聲。
+o|大人：小心，別靠太近。讓我來。
+b|好。牠的腳好像不能動了。
+o|大人：我知道，我們會帶牠去找獸醫。
+b|牠會好起來嗎？
+o|大人：我不能保證，但大家都會盡力。
+n|短暫安靜。
+b|那就好。
+n|紙箱被抱起。衣物摩擦聲。
+b|等一下。
+o|大人：怎麼了？
+b|牠的耳朵還露在外面。
+o|大人：……我幫你弄好。
+b|謝謝。
+n|腳步聲逐漸遠去。深深吸了一大口氣的聲音。
+b|不要睡著喔！撐住！就快能看醫生了！`],
+['C-02','喝醉','復現片段　非 M.E.G.CN 錄音　無檔案代號<br>片段年代：不明（隊員聚餐）',`n|室內談笑聲、碗盤碰撞聲。
+o|隊員A：特工，我還以為你真的不喝酒。
+a|我是不太喝。
+o|隊員B：那今天呢？
+a|這不是有值得慶祝的事嘛！而且難得休假！
+n|玻璃碰撞聲。
+a|……嗯。這個還不錯。
+o|隊員A：你耳朵很紅哦。
+a|不覺得室內很熱嗎？
+o|隊員B：你才喝多少？
+a|兩杯而已。
+o|隊員A：原來你酒量這麼差，這就是『王牌』特工平常不喝酒的原因嗎？
+a|別胡說。我非常清醒。
+n|低笑。
+a|欸，你們，過來一點。
+o|隊員A：嗯？
+o|隊員B：幹嘛？
+a|跟你們說一件事。
+o|隊員A：怎麼了？
+a|其實你們人都不錯。
+o|隊員B：……
+o|隊員A：哈哈哈哈哈！你是這種類型？
+a|不是，我是認真的。
+n|椅子挪動聲。
+a|███你上次幫我修通訊器，我還沒跟你道謝。
+o|隊員A：那都多久以前的事了，別在意。
+a|我記得啊。
+a|還有███。上次任務結束，你明明自己也受傷了，還跑來幫我搬東西。
+o|隊員B：這也記得？
+a|當然。
+n|杯子被輕輕放下的敲擊。
+a|總之，謝謝你們。我知道自己可能偶爾很任性。
+o|隊員A：你……我是說，你今天真的喝多了。
+a|可能吧。
+n|短暫安靜。
+a|其實我很高興。
+o|隊員B：高興？
+a|還能有這樣的聚會，能跟你們一起吃飯啊。
+n|談笑聲變小，似乎帶著哽咽。
+o|隊員A：……這種話不要說出來，不吉利。
+a|別擔心，有我在嘛！
+o|隊員B：真是的……要不要送你回去睡覺？
+a|等一下。
+o|隊員B：又怎麼了？
+a|今天的帳……我付。
+o|隊員A：啊啊，剛剛好像有哪個清醒的人搶著付帳，但現在又忘記了？
+a|喔。
+n|停頓、笑聲。
+a|那就好。
+n|衣物摩擦聲，似乎有人趴在桌上。`],
+['C-03','發燒','復現片段　非 M.E.G.CN 錄音　無檔案代號<br>片段年代：不明（休整期間）',`n|摀住的咳嗽聲。清脆鍵盤敲擊聲。腳步聲。
+o|隊員A：你怎麼還在這裡？
+a|不要著急～就快好了～
+o|隊員A：你半小時前就說過這句話了。
+a|哈哈！這是始終如一！
+o|隊員A：你知道什麼是體溫三十九度嗎？
+a|三十八點九。
+o|隊員A：有差嗎？
+a|只要你幫幫忙，把小數點忽略，就差很多了對吧。
+n|一串咳嗽。喝水的咕嚕聲。金屬與木頭的碰撞聲。
+o|隊員A：把資料關掉，去休息。
+a|誒！等等等！我還差最後一份！
+o|隊員A：你今天不能出勤，也不能工作。
+a|哎呀，不能出勤我認了，可是沒有不能工作這條規定吧？
+o|隊員A：還記得你熟悉的醫療組同志嗎？是剛剛才下的指令。
+n|幾聲笑。椅背向後擺的嘎吱聲。
+a|真是，他們管得也太寬了吧……下次我一定要去說聲。
+o|隊員A：你在看什麼？
+a|昨天的探索紀錄。有幾個座標對不上，我想標記起來，免得下一組人走錯。
+o|隊員A：那我來處理吧。
+a|你先看第三頁，右下角那個標記不是出口。
+n|滑鼠點擊聲。
+o|隊員A：你怎麼知道？
+a|因為我昨天差點從那裡掉下去。
+n|短暫沉默。
+o|隊員A：哦？你昨天就不舒服了？
+a|一點點。
+o|隊員A：你最好不要讓我知道你是帶著發燒出勤的。
+a|哈哈，我可沒有這麼說～
+o|隊員A：……
+n|椅子滾輪移動聲。拍肩膀與肢體碰撞聲。
+o|隊員A：起來，病號給我回床上。
+a|啊啊，我還沒存檔！
+o|隊員A：我幫你。
+a|記得備份。
+o|隊員A：知道了。
+a|還有，明天如果我沒退燒，幫我把那份報告交給——
+o|隊員A：明天的事情明天再說。
+n|沉默片刻。
+a|……好吧。還有，謝謝了。
+n|鍵盤停止。腳步聲。`],
+['C-04','罐頭','復現片段　非 M.E.G.CN 錄音　無檔案代號<br>片段年代：不明（夜間休整）',`n|00:00　持續的低頻嗡鳴，遠處有規律的滴水聲。有人在翻動塑膠袋。
+o|隊員A：我好想吃熱的……隨便什麼熱的都行。
+o|隊員B：+1。冷罐頭我已經吃到有點想哭了。
+o|隊員C：誰有打火機？
+o|隊員B：沒有，唯一的剛剛也被地板吞掉了。
+o|隊員A：平底鍋呢？
+o|隊員C：你看我們像有帶平底鍋的樣子嗎。
+n|01:10　拉鍊聲與翻找聲，約15秒。
+o|隊員A：……半包濕紙巾，一支沒水的筆，還有……鋁箔紙？皺成這樣。
+o|隊員B：這能幹嘛？當鍋子？尺寸是夠啦，可是拿什麼加熱？
+n|01:48　餅乾被咬碎的聲音，距離麥克風較遠。對話中斷約4秒。
+o|隊員C：特工，你背不是會發燙嗎？就那個，能力的副作用。
+n|02:01　咀嚼聲停止。約3秒無人說話。
+a|……你們不會是想拿我當爐子吧？
+o|隊員A：可以嗎？
+a|哈哈哈！這也太有創意了！來來來，我配合！
+n|02:31　衣料摩擦與重物落地的悶響，疑似有人趴下。
+a|本日限定燒烤店，即將開張～
+o|隊員B：你別亂動啊。
+a|是是是，收到。
+n|03:05　接下來的約20秒，只聽得見遠處風扇規律轉動的聲音。鋁箔紙邊緣傳來細微的劈啪聲。隊員A低聲說了一句〔無法辨識〕。
+o|隊員A：欸，真的有熱！現在可以倒了嗎？
+a|可以可以，慢慢倒，別灑到我身上就好。
+n|03:40　罐頭滑動聲，接著是「滋」的一聲。所有人同時安靜。
+o|隊員C：特工，你真的不會燙傷？
+a|放心啦，溫度我自己有數。怎麼樣，這廚具是不是很高級？自動加熱，附贈智慧控溫。
+o|隊員B：高級在哪？
+o|隊員C：在於他會講話。
+n|04:22　笑聲（三人以上），餐具刮擦聲，一度蓋過語音。
+o|隊員A：……好吃。熱的真的不一樣。
+a|那當然，本店對溫度很講究的。
+o|隊員B：老闆，再來一份！
+a|抱歉，今天限量，已經打烊了。
+o|隊員C：欸，這麼難得，拍張照紀念一下？
+a|不行。
+n|05:14　回答幾乎沒有間隔，語速明顯快於前後對話。隊員C停頓約3秒。
+o|隊員C：咦？為什麼？
+a|這個嘛～料理可以公開製作，攝影服務不提供。商業機密！
+o|隊員B：小氣。
+a|沒辦法呀，開店不容易。
+n|05:52　眾人嬉鬧聲。夾雜一陣衣料拉扯聲，疑似有人在整理衣服下襬。
+o|錄音者無意間記下他對「拍照」的反應速度與其餘對話明顯不同，其後立即以玩笑掩飾。推測他拒絕的是背部被拍到，而非料理本身。
+o|研究部：無法確認此能力與背部異常標記是否有關。特工拒絕說明。
+i|罐頭放在他們中間，是熱的。第一個開口的人，先伸了手。`],
+['C-05','小時候','復現片段　非 M.E.G.CN 錄音　無檔案代號<br>片段年代：特工幼年',`n|悶悶的雨聲。低聲的交談。
+o|大人：你怎麼還沒睡？
+b|睡不著。
+o|大人：小孩子要早點睡……你在做什麼？
+b|看書。
+o|大人：這麼晚了還看？
+b|我就快看完了，再一下就好。
+n|紙張翻動聲。腳步聲。
+o|大人：嗯哼，好吧。你長大以後想做什麼？
+b|不知道。
+o|大人：不一定要多偉大。有一點想法也不錯。
+b|想去很多地方。
+o|大人：噢～像是去哪裡？
+b|不知道。反正很多地方。
+o|大人：這樣啊，那萬一不小心迷路了怎麼辦？
+b|不會啊，我會記住路線的。
+o|大人：要是忘記了呢？
+b|那就當探險家，再找一次就行。
+n|短暫沉默後，笑聲。
+o|大人：你倒是很有自信。
+b|本來就是。
+n|木椅子移動聲。
+b|欸。
+o|大人：怎麼了？
+b|如果有人迷路了，我是不是也可以帶他回家？
+o|大人：可以啊。
+b|那如果他不知道家在哪裡呢？
+o|大人：嗯……那就先陪他找個能休息的地方吧。
+b|喔。
+n|雨聲。
+o|大人：好了，該睡覺了。
+b|再五分鐘。
+o|大人：三分鐘。
+b|四分鐘。
+o|大人：兩分鐘。
+b|……還是三分鐘吧。
+n|幾聲輕笑。`]
+);
+function collHtml(){const ids=['C-01','C-02','C-03','C-04','C-05'];return `<div class="coll"><h2>▮ Shade 的收藏</h2>
+<p class="hush it">這裡是我放東西的地方。不是檔案，沒有編號規則，也沒有人審。</p>
+<p class="hush">以下都不是 M.E.G.CN 的錄音。是 Shade 用它自己的方式，把過去的幾個片段重新留了下來。片段裡的人不知道自己被留在這裡。聽的時候，輕一點。</p>`+ids.map((id,n)=>{const i=REC.findIndex(r=>r[0]==id),r=REC[i];return `<details><summary>收藏 ${String(n+1).padStart(2,'0')}：${r[1]} <span class="tag">Shade 的收藏</span></summary><div class="lgd" style="color:var(--mut)">${r[2]}</div><button data-p="${i}">▶ 播放</button> <button data-f="${i}">展示片段</button> <button data-x>■ 停止</button><div class="lg" id="lg${i}"></div></details>`}).join('')+`</div>`}
+P.coll={n:'Shade 的收藏',l:1,h:collHtml,i:recInit};
 nav();go('home');
 </script>
 <script>
@@ -1616,4 +1815,105 @@ const r=f.getBoundingClientRect(),w=card.offsetWidth,x=Math.max(8,Math.min(inner
 card.style.left=x+'px';card.style.top=(r.bottom+scrollY+8)+'px'});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')hide()});})();
 })();
+</script>
+<script>
+/* ===== 隱藏彩蛋：聽完所有普通音檔 → Shade 搭話 → 私人收藏 =====
+   - 以 'rec:ended'（站內逐字稿「播放」自然結束）與原生 <audio> 的 ended 事件作為「完整播放」依據
+   - 狀態存於 localStorage：lv616_egg_v1（heard / trig / stage / gotKey / coll / log）
+   - 普通音檔清單見 EGG_ORD；I-06 異常音訊不計入 */
+(function(){
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+let panel,logEl,inp,chip,busy=false,isOpen=false,misses=0,nearN=0;
+const who=()=>named?'Shade':'白日之影';
+const active=()=>['ask','offer','key'].includes(EGG.stage);
+
+function onEnded(id){
+  if(!EGG_ORD.includes(id))return;
+  if(!EGG.heard.includes(id)){EGG.heard.push(id);eggSave()}
+  if(!EGG.trig&&EGG_ORD.every(x=>EGG.heard.includes(x))){EGG.trig=true;EGG.stage='ask';eggSave();setTimeout(start,5500)}
+}
+document.addEventListener('rec:ended',e=>onEnded(e.detail&&e.detail.id));
+document.addEventListener('ended',e=>{const a=e.target;if(a&&a.tagName==='AUDIO')onEnded(a.dataset.recId||a.dataset.id||a.id)},true);
+document.addEventListener('egg:unlocked',()=>{EGG.stage='done';eggSave();if(panel)panel.hidden=true;if(chip)chip.hidden=true;isOpen=false});
+
+function build(){
+  if(panel)return;
+  panel=document.createElement('section');panel.className='shc';panel.hidden=true;panel.setAttribute('role','dialog');panel.setAttribute('aria-label',who());
+  panel.innerHTML='<header><b></b><span></span><button type="button" aria-label="收起">–</button></header><div class="sl" aria-live="polite"></div><form autocomplete="off"><input type="text" maxlength="80" placeholder="說點什麼……" aria-label="回覆"><button>送出</button></form>';
+  panel.querySelector('b').textContent=who();
+  const hd=panel.querySelector('header');
+  hd.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;const r=panel.getBoundingClientRect(),dx=e.clientX-r.left,dy=e.clientY-r.top;panel.style.left=r.left+'px';panel.style.top=r.top+'px';panel.style.bottom='auto';panel.style.animation='none';hd.style.cursor='grabbing';try{hd.setPointerCapture(e.pointerId)}catch(_){}const mv=ev=>{panel.style.left=Math.min(Math.max(0,ev.clientX-dx),Math.max(0,innerWidth-panel.offsetWidth))+'px';panel.style.top=Math.min(Math.max(0,ev.clientY-dy),Math.max(0,innerHeight-panel.offsetHeight))+'px'};const up=()=>{hd.style.cursor='';hd.removeEventListener('pointermove',mv);hd.removeEventListener('pointerup',up);hd.removeEventListener('pointercancel',up)};hd.addEventListener('pointermove',mv);hd.addEventListener('pointerup',up);hd.addEventListener('pointercancel',up)});
+  addEventListener('resize',()=>{if(panel.style.top){panel.style.left=Math.min(parseFloat(panel.style.left)||0,Math.max(0,innerWidth-panel.offsetWidth))+'px';panel.style.top=Math.min(parseFloat(panel.style.top)||0,Math.max(0,innerHeight-panel.offsetHeight))+'px'}});
+  logEl=panel.querySelector('.sl');inp=panel.querySelector('input');
+  panel.querySelector('header button').onclick=()=>show(false);
+  panel.querySelector('form').onsubmit=e=>{e.preventDefault();const t=inp.value;inp.value='';handle(t)};
+  chip=document.createElement('button');chip.type='button';chip.className='shchip';chip.hidden=true;chip.textContent=who()+' ▸';
+  chip.onclick=()=>{show(true);inp.focus()};
+  document.body.append(panel,chip);
+  EGG.log.forEach(([k,t])=>draw(k,t));
+}
+function draw(k,t){const near=logEl.scrollHeight-logEl.scrollTop-logEl.clientHeight<60,d=document.createElement('div');d.className=k;d.textContent=t;logEl.append(d);if(near||k=='v')logEl.scrollTop=logEl.scrollHeight;return d}
+function push(k,t){draw(k,t);EGG.log.push([k,t]);if(EGG.log.length>60)EGG.log.shift();eggSave()}
+function show(v){isOpen=v;panel.hidden=!v;chip.hidden=v||!active();if(v)logEl.scrollTop=logEl.scrollHeight}
+async function say(lines){
+  busy=true;inp.disabled=true;
+  for(const t of lines){const d=draw('t','……');await wait(650+Math.min(t.length,28)*45);d.remove();push('s',t)}
+  busy=false;inp.disabled=false;if(isOpen)inp.focus();
+}
+async function start(){
+  if(!active())return;build();show(true);
+  if(!EGG.log.length)await say(['你把它們都聽完了。','從頭到尾，一段一段。很少有人這樣。','……聽完，有什麼想說的嗎？隨便說什麼都行。']);
+}
+
+const CAT=/貓|猫|喵|咪|\bcats?\b|kitt|meow|P-?0?8\b/i;
+const NEAR=/紙箱|灰白|小動物|動物|休整區|沒有關係|無關|不相關|沒關聯|突兀|混進|混了|格格不入|不屬於|不該在|不對勁|怪怪的|很奇怪|奇怪的/;
+const NO=/不用|不想|不要|不了|算了|沒興趣|下次|先不|不好|不太|\bno\b/i;
+const YES=/想|要|好|可以|行|看|給我|來|當然|拜託|\bok\b|yes|sure|帶我/i;
+const SOFT=[[/怕|恐怖|可怕|毛骨|驚|不安|陰/,'會怕是正常的。我也怕過。'],[/感動|溫柔|暖|難過|心酸|鼻酸|悲傷|好笑|有趣|可愛/,'……嗯。他有些地方，比聽起來更軟。'],[/你|shade|白日之影|影子/i,'我？……我在聽你說。'],[/長|久|累|無聊|吵/,'抱歉。我不太會估時間。']];
+const POOL=['嗯。','這樣啊。','……是嗎。','還有嗎？隨便什麼都行。','我沒有要打分數。你說就好。'];
+
+async function handle(t){
+  t=t.trim();if(!t||busy)return;push('v',t);
+  const st=EGG.stage,cat=CAT.test(t);
+  if(st==='ask'){
+    if(cat)return confess();
+    if(NEAR.test(t)&&nearN<2){nearN++;return say(['你說的是哪一段？'])}
+    misses++;
+    if(misses>=9){await say(['我去看一下別的。','你想到什麼，再來說。']);return show(false)}
+    if(misses===5)return say(['……我本來以為，會有人問起什麼的。','算了，也不一定。']);
+    const s=SOFT.find(x=>x[0].test(t));
+    return say([s?s[1]:POOL[misses%POOL.length]]);
+  }
+  if(st==='offer'){
+    if(NO.test(t))return say(['好。','那就先不看。','我不會收走的。想看的時候，再說。']);
+    if(YES.test(t))return giveKey();
+    if(cat)return say(['對，就是那一隻。','……想看我留的其他東西嗎？']);
+    if(/什麼|哪些|有啥/.test(t))return say(['很多。都是小東西。','聽了就知道。……想看嗎？']);
+    return say(['想看，還是不想？','都可以。']);
+  }
+  if(st==='key'){
+    if(/暗號|密鑰|密碼|鑰匙|怎麼|哪|驗證|門|忘|什麼|再說/.test(t))return say(['「再看一眼」。','在你們那個輸入驗證的小視窗裡。']);
+    return say([['嗯。','去吧。','我在這。','不急。'][Math.random()*4|0]]);
+  }
+}
+async function confess(){
+  EGG.stage='offer';eggSave();
+  await say(['啊。','……你注意到了。','那一段，是我放進去的。','其他的錄音，都有人要審、有人要歸檔。那一段沒有人要，所以我自己放進去了。','因為覺得好玩。也可能是……可愛吧。他蹲下去的時候，連說話的聲音都變小了。','我很喜歡那個，所以特地留著。','其實不只那一段。我還留了別的。','不是什麼重要的東西，就是我自己喜歡的。','你想看看嗎？']);
+}
+async function giveKey(){
+  EGG.stage='key';EGG.gotKey=true;eggSave();
+  await say(['好。','那個地方不在你們的目錄裡。我不太會做門鎖，所以只想到一個辦法。','去你們那個輸入驗證的小視窗，對它說：「再看一眼」。','他在箱子旁邊說過的。我覺得很適合。','……慢慢看。有些很短。']);
+  setTimeout(()=>{if(isOpen&&!busy)show(false)},4500);
+}
+
+/* 重新整理後還原：已觸發但未結束的對話，保留記錄與一個很小的入口 */
+function restore(){
+  if(EGG.coll)EGG.stage='done';
+  if(!EGG.trig||!active())return;
+  build();
+  if(!EGG.log.length)setTimeout(start,3500);else show(false);
+}
+restore();
+})();
+
 </script></body></html>
